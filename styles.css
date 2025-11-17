@@ -1,0 +1,334 @@
+/* =========================
+   FONT + RESET + BASE
+========================= */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@300;400;700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: #ffe6f0;
+    color: #5c2a4d;
+    font-family: 'Cormorant Garamond', serif;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+}
+
+body {
+    font-size: 18px;
+    line-height: 1.7;
+    text-align: center;
+    padding: 30px;
+}
+
+/* =========================
+   REUSABLE CONTAINER
+========================= */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+.site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.logo {
+    max-width: 220px;
+    border-radius: 12px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* center nav links on wide screens, stack on small screens */
+.nav-links {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #5c2a4d;
+    background: rgba(255,102,178,0.08);
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-weight: 700;
+    transition: transform .18s ease, background .18s ease;
+    font-family: 'Playfair Display', serif;
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+    transform: translateY(-3px);
+    background: #ff99cc;
+    color: white;
+    outline: none;
+}
+
+/* =========================
+   HERO / HOME
+========================= */
+.hero {
+    background: linear-gradient(180deg, rgba(255,102,178,0.06), rgba(255,153,204,0.02));
+    padding: 28px;
+    border-radius: 16px;
+    margin-bottom: 28px;
+    box-shadow: 0 6px 18px rgba(92,42,77,0.06);
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    color: #ff66b2;
+    font-size: 42px;
+    margin: 6px 0 8px;
+    letter-spacing: .5px;
+}
+
+.hero p.lead {
+    max-width: 800px;
+    margin: 0 auto 16px;
+    font-size: 20px;
+    color: #5c2a4d;
+}
+
+/* CTA */
+.pink-button {
+    background-color: #ff66b2;
+    color: white;
+    padding: 12px 26px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 700;
+    display: inline-block;
+    transition: all 0.25s ease;
+    box-shadow: 0 6px 18px rgba(255,102,178,0.18);
+}
+
+.pink-button:hover,
+.pink-button:focus {
+    background-color: #ff99cc;
+    transform: translateY(-3px) scale(1.02);
+    outline: none;
+}
+
+/* small pink link */
+.pink-link {
+    color: #ff66b2;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.pink-link:hover {
+    color: #ff99cc;
+}
+
+/* =========================
+   INFO / SECTIONS
+========================= */
+.info-container, .nail-sizing-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 28px 0;
+}
+
+.info-card, .nail-card {
+    background-color: #fff7fb;
+    border-radius: 14px;
+    padding: 20px;
+    flex: 1 1 320px;
+    min-width: 260px;
+    box-shadow: 0 6px 16px rgba(92,42,77,0.06);
+    text-align: left;
+}
+
+.info-card h2, .nail-card h2 {
+    font-family: 'Playfair Display', serif;
+    color: #ff66b2;
+    margin-top: 0;
+}
+
+/* lists inside cards */
+.info-card p, .nail-card p, .info-card li {
+    color: #5c2a4d;
+    font-size: 17px;
+}
+
+/* images */
+.nail-image, .product-image {
+    width: 100%;
+    border-radius: 12px;
+    margin: 12px 0 6px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+/* =========================
+   PRODUCT GRID
+========================= */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+    margin: 22px 0;
+    justify-items: center;
+}
+
+.product-card {
+    background-color: #fff7fb;
+    border-radius: 14px;
+    padding: 12px;
+    width: 100%;
+    max-width: 260px;
+    position: relative;
+    border: 2px solid rgba(255,102,178,0.18);
+    transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 14px 38px rgba(255,102,178,0.12);
+}
+
+.product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 18px;
+    margin: 8px 0 6px;
+    color: #5c2a4d;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.price {
+    font-weight: 700;
+    font-family: 'Playfair Display', serif;
+    color: #5c2a4d;
+    font-size: 18px;
+}
+
+/* buy button inside card */
+.card-buy {
+    display: inline-block;
+    background: transparent;
+    border: 2px dashed #ff66b2;
+    color: #ff66b2;
+    padding: 8px 12px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all .18s ease;
+}
+
+.card-buy:hover {
+    background: #ff66b2;
+    color: white;
+    border-style: solid;
+}
+
+/* highlight custom card */
+.product-card.custom {
+    border: 3px solid #ff66b2;
+    box-shadow: 0 0 18px rgba(255,153,204,0.12);
+}
+
+/* =========================
+   CUSTOM-DESIGNS PAGE
+========================= */
+.custom-intro {
+    margin-bottom: 18px;
+}
+
+/* =========================
+   CONTACT + FOOTER
+========================= */
+.contact-wrap {
+    background: rgba(255,153,204,0.03);
+    border-radius: 12px;
+    padding: 18px;
+    margin: 22px 0 40px;
+}
+
+.footer {
+    font-size: 14px;
+    color: #5c2a4d;
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(92,42,77,0.06);
+}
+
+/* small muted text */
+.muted {
+    color: rgba(92,42,77,0.7);
+    font-size: 14px;
+}
+
+/* =========================
+   ACCESSIBILITY + UTILITIES
+========================= */
+.visually-hidden {
+    position: absolute!important;
+    height: 1px; width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+}
+
+/* =========================
+   RESPONSIVE RULES
+========================= */
+@media (max-width: 1000px) {
+    .product-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .hero h1 {
+        font-size: 36px;
+    }
+}
+
+@media (max-width: 760px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .nav-links {
+        gap: 8px;
+    }
+    body { padding: 20px; }
+}
+
+@media (max-width: 500px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+    .site-nav {
+        flex-direction: column;
+    }
+    .logo {
+        max-width: 180px;
+    }
+    .hero h1 {
+        font-size: 28px;
+    }
+}
