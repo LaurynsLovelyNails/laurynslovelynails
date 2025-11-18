@@ -136,13 +136,13 @@
     </form>
 </div>
 
-<!-- EmailJS new SDK -->
-<script type="module">
-    import emailjs from 'https://cdn.emailjs.com/dist/emailjs.browser.min.mjs';
-
+<!-- EmailJS script (non-module version) -->
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+    // Initialize EmailJS
     emailjs.init('i867MwdYbdGX-w0Dr'); // Your User ID
 
-    window.sendEmail = function(e) {
+    function sendEmail(e) {
         e.preventDefault();
 
         const templateParams = {
