@@ -6,16 +6,88 @@
 <title>Order - Lauryn's Lovely Nails</title>
 <link rel="stylesheet" href="styles.css">
 <style>
-body { font-family: 'Cormorant Garamond', serif; background-color: #fff0f5; margin:0; padding:0; }
-.container { max-width:900px; margin:0 auto; padding:20px; display:flex; flex-wrap:wrap; gap:20px; }
-.left, .right { flex:1 1 400px; }
-.left img { width:100%; border-radius:12px; }
-.right { display:flex; flex-direction:column; gap:10px; }
-label { font-weight:700; }
-select,input { padding:8px; border-radius:8px; border:1px solid #ccc; width:100%; }
-.total { font-weight:700; font-size:20px; color:hotpink; margin-top:10px; }
-button { background-color:#ff66b2; color:white; padding:10px; border:none; border-radius:12px; font-weight:700; cursor:pointer; }
-button:hover { background-color:#ff99cc; }
+body { 
+    font-family: 'Cormorant Garamond', serif; 
+    background-color: #fff0f5; 
+    margin:0; 
+    padding:0; 
+}
+
+.container { 
+    max-width:900px; 
+    margin:0 auto; 
+    padding:20px; 
+    display:flex; 
+    flex-wrap:wrap; 
+    gap:20px; 
+}
+
+.left, .right { 
+    flex:1 1 400px; 
+}
+
+.left img { 
+    width:100%; 
+    border-radius:12px; 
+}
+
+.right { 
+    display:flex; 
+    flex-direction:column; 
+    gap:10px; 
+}
+
+label { 
+    font-weight:700; 
+}
+
+select, input { 
+    padding:8px; 
+    border-radius:8px; 
+    border:1px solid #ccc; 
+    width:100%; 
+}
+
+.total { 
+    font-weight:700; 
+    font-size:20px; 
+    color:hotpink; 
+    margin-top:10px; 
+}
+
+button { 
+    background-color:#ff66b2; 
+    color:white; 
+    padding:10px; 
+    border:none; 
+    border-radius:12px; 
+    font-weight:700; 
+    cursor:pointer; 
+}
+
+button:hover { 
+    background-color:#ff99cc; 
+}
+
+.order-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.btn-shop, .btn-home {
+    background: #ff66b2;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.btn-shop:hover, .btn-home:hover {
+    background: #ff99cc;
+}
 </style>
 </head>
 <body>
@@ -25,6 +97,7 @@ button:hover { background-color:#ff99cc; }
         <!-- Placeholder image for now -->
         <img id="designImage" src="https://via.placeholder.com/400x400.png?text=Design+Image" alt="Design">
     </div>
+
     <div class="right">
         <h2 id="designName">Design Name</h2>
 
@@ -59,15 +132,21 @@ button:hover { background-color:#ff99cc; }
         <div class="total">Total: $0</div>
 
         <button onclick="placeOrder()">Place Order</button>
+
+        <div class="order-buttons">
+            <a href="buy.html" class="btn-shop">Continue Shopping</a>
+            <a href="index.html" class="btn-home">Return Home</a>
+        </div>
     </div>
 </div>
 
 <script>
+// Read URL parameters ?design=NAME&price=12
 const params = new URLSearchParams(window.location.search);
 const designName = params.get('design') || 'Unknown Design';
 const basePrice = parseFloat(params.get('price')) || 0;
 
-// Update name
+// Update design name
 document.getElementById('designName').textContent = designName;
 
 // Price calculation
@@ -76,16 +155,45 @@ const totalEl = document.querySelector('.total');
 
 function updateTotal() {
     let price = basePrice;
-    if(lengthEl.value === "XXL") price +=1;
-    if(lengthEl.value === "XXXL") price +=2;
+    if (lengthEl.value === "XXL") price += 1;
+    if (lengthEl.value === "XXXL") price += 2;
     totalEl.textContent = `Total: $${price}`;
 }
-
 lengthEl.addEventListener('change', updateTotal);
 updateTotal();
 
+// SEND ORDER TO BACKEND
 function placeOrder() {
-    alert(`Order placed for ${designName}!\n${totalEl.textContent}\nName: ${document.getElementById('fullName').value}\nContact: ${document.getElementById('contact').value}`);
+    const fullName = document.getElementById('fullName').value.trim();
+    const contact = document.getElementById('contact').value.trim();
+
+    if (!fullName || !contact) {
+        alert("Please fill out your name and contact.");
+        return;
+    }
+
+    const orderData = {
+        design: designName,
+        length: lengthEl.value,
+        shape: document.getElementById('shape').value,
+        name: fullName,
+        contact: contact,
+        price: totalEl.textContent.replace("Total: $", "")
+    };
+
+    fetch("http://localhost:3000/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderData)
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert("Order sent successfully! 💅✨");
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Error sending order. Make sure your backend server is running.");
+    });
 }
 </script>
 
