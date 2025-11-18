@@ -6,26 +6,25 @@
 <title>Order - Lauryn's Lovely Nails</title>
 <link rel="stylesheet" href="styles.css">
 <style>
-body { font-family: 'Cormorant Garamond', serif; background-color: #fff0f5; margin:0; padding:0; }
-.site-nav { display:flex; justify-content:space-between; align-items:center; padding:15px; background-color:white; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
+body { font-family: 'Cormorant Garamond', serif; background:#fff0f5; margin:0; padding:0; }
+.site-nav { display:flex; justify-content:space-between; align-items:center; padding:15px; background:white; box-shadow:0 2px 6px rgba(0,0,0,0.1);}
 .site-nav .nav-links a { margin-left:15px; text-decoration:none; color:#333; font-weight:700; }
 .site-nav .nav-links a:hover { color:hotpink; }
-.container { max-width:900px; margin:20px auto; padding:20px; display:flex; flex-wrap:wrap; gap:20px; background-color:white; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
-.left, .right { flex:1 1 400px; }
-.left img { width:100%; border-radius:12px; }
-.right { display:flex; flex-direction:column; gap:10px; }
-label { font-weight:700; }
-select,input { padding:8px; border-radius:8px; border:1px solid #ccc; width:100%; }
-.total { font-weight:700; font-size:20px; color:hotpink; margin-top:10px; }
-button { background-color:#ff66b2; color:white; padding:10px; border:none; border-radius:12px; font-weight:700; cursor:pointer; }
-button:hover { background-color:#ff99cc; }
+.container { max-width:900px; margin:20px auto; padding:20px; display:flex; flex-wrap:wrap; gap:20px; background:white; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1);}
+.left, .right { flex:1 1 400px;}
+.left img { width:100%; border-radius:12px;}
+.right { display:flex; flex-direction:column; gap:10px;}
+label { font-weight:700;}
+select,input { padding:8px; border-radius:8px; border:1px solid #ccc; width:100%;}
+.total { font-weight:700; font-size:20px; color:hotpink; margin-top:10px;}
+button { background:#ff66b2; color:white; padding:10px; border:none; border-radius:12px; font-weight:700; cursor:pointer;}
+button:hover { background:#ff99cc;}
 </style>
 </head>
 <body>
 
-<!-- Nav bar -->
 <nav class="site-nav">
-    <a href="index.html"><img src="logo.png" alt="Lauryn's Lovely Nails logo" class="logo" style="height:50px;"></a>
+    <a href="index.html"><img src="logo.png" alt="Lauryn's Lovely Nails logo" style="height:50px;"></a>
     <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="buy.html">Buy</a>
@@ -37,7 +36,7 @@ button:hover { background-color:#ff99cc; }
 
 <div class="container">
     <div class="left">
-        <img id="designImage" src="https://via.placeholder.com/400x400.png?text=Design+Image" alt="Design">
+        <img id="designImage" src="images/placeholder.png" alt="Design">
     </div>
     <div class="right">
         <h2 id="designName">Design Name</h2>
@@ -77,13 +76,15 @@ button:hover { background-color:#ff99cc; }
 </div>
 
 <script>
-// Get URL params for design
+// Get URL params
 const params = new URLSearchParams(window.location.search);
 const designName = params.get('design') || 'Unknown Design';
 const basePrice = parseFloat(params.get('price')) || 0;
+const imgFile = params.get('img') || 'placeholder.png';
 
-// Update design name
+// Update design name and image
 document.getElementById('designName').textContent = designName;
+document.getElementById('designImage').src = `images/${imgFile}`;
 
 // Update price
 const lengthEl = document.getElementById('length');
@@ -98,34 +99,14 @@ function updateTotal() {
 lengthEl.addEventListener('change', updateTotal);
 updateTotal();
 
-// Place order function
+// Place order
 function placeOrder() {
-    const orderData = {
-        design: designName,
-        length: lengthEl.value,
-        shape: document.getElementById('shape').value,
-        fullName: document.getElementById('fullName').value,
-        contact: document.getElementById('contact').value,
-        price: totalEl.textContent.replace('Total: $','')
-    };
-
-    fetch("https://YOUR-RENDER-URL/order", {
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body: JSON.stringify(orderData)
-    })
-    .then(res=>res.json())
-    .then(data=>{
-        alert("✅ Order sent! Check your email.");
-    })
-    .catch(err=>{
-        console.error(err);
-        alert("❌ Error sending order. Check console.");
-    });
+    alert(`Order placed for ${designName}!\n${totalEl.textContent}\nName: ${document.getElementById('fullName').value}\nContact: ${document.getElementById('contact').value}`);
 }
 </script>
 
 </body>
 </html>
+
 
 
