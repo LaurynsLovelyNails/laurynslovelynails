@@ -1,170 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Page - Lauryn's Lovely Nails</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Cormorant Garamond', serif;
-            background: #ffe6f0;
-            color: #5c2a4d;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .container {
-            display: flex;
-            gap: 20px;
-            background: white;
-            padding: 15px;
-            border-radius: 15px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            max-width: 900px;
-        }
-
-        .product-image {
-            width: 300px;
-            border-radius: 10px;
-        }
-
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            flex: 1;
-        }
-
-        .section {
-            background: #d63384;
-            padding: 12px;
-            border-radius: 12px;
-            color: white;
-            font-size: 16px;
-        }
-
-        select, input, textarea {
-            width: 100%;
-            padding: 6px;
-            border-radius: 8px;
-            border: none;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 16px;
-        }
-
-        .price {
-            font-size: 18px;
-            font-weight: 700;
-            margin-top: 8px;
-        }
-
-        .order-btn {
-            background: #ff4da6;
-            color: white;
-            padding: 10px 18px;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 700;
-            font-family: 'Playfair Display', serif;
-            align-self: flex-start;
-        }
-
-        .order-btn:hover {
-            background: #e04494;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Page - Lauryn's Lovely Nails</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Cormorant Garamond', serif;
+      background: #ffe6f0;
+      color: #5c2a4d;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      display: flex;
+      gap: 20px;
+      background: white;
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 900px;
+    }
+    .product-image {
+      width: 300px;
+      border-radius: 10px;
+    }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      flex: 1;
+    }
+    .section {
+      background: #d63384;
+      padding: 12px;
+      border-radius: 12px;
+      color: white;
+      font-size: 16px;
+    }
+    select, input, textarea {
+      width: 100%;
+      padding: 6px;
+      border-radius: 8px;
+      border: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+    }
+    .price {
+      font-size: 18px;
+      font-weight: 700;
+      margin-top: 8px;
+    }
+    .order-btn {
+      background: #ff4da6;
+      color: white;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 700;
+      font-family: 'Playfair Display', serif;
+      align-self: flex-start;
+    }
+    .order-btn:hover {
+      background: #e04494;
+    }
+  </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- LEFT: Product Image -->
-    <img src="design1.png" class="product-image" alt="Product" />
+  <!-- LEFT: Product Image -->
+  <img src="design1.png" class="product-image" alt="Product" />
 
-    <!-- RIGHT: Order Form -->
-    <form id="orderForm" class="options" onsubmit="sendEmail(event)">
-        <div class="section">
-            <label>Choose Length:</label>
-            <select name="length" required>
-                <option value="">Select...</option>
-                <option>xxs</option>
-                <option>xs</option>
-                <option>x</option>
-                <option>m</option>
-                <option>mm</option>
-                <option>l</option>
-                <option>xl</option>
-                <option>xxl</option>
-                <option>xxxl</option>
-                <option>xxxxl</option>
-            </select>
-        </div>
+  <!-- RIGHT: Order Form -->
+  <form id="orderForm" class="options">
+    <div class="section">
+      <label>Choose Length:</label>
+      <select name="length" required>
+        <option value="">Select...</option>
+        <option>xxs</option>
+        <option>xs</option>
+        <option>x</option>
+        <option>m</option>
+        <option>mm</option>
+        <option>l</option>
+        <option>xl</option>
+        <option>xxl</option>
+        <option>xxxl</option>
+        <option>xxxxl</option>
+      </select>
+    </div>
 
-        <div class="section">
-            <label>Choose Shape:</label>
-            <select name="shape" required>
-                <option value="">Select...</option>
-                <option>Coffin</option>
-                <option>Square</option>
-                <option>Almond</option>
-                <option>Stiletto</option>
-                <option>Round</option>
-            </select>
-        </div>
+    <div class="section">
+      <label>Choose Shape:</label>
+      <select name="shape" required>
+        <option value="">Select...</option>
+        <option>Coffin</option>
+        <option>Square</option>
+        <option>Almond</option>
+        <option>Stiletto</option>
+        <option>Round</option>
+      </select>
+    </div>
 
-        <div class="section">
-            <label>Your Name:</label>
-            <input type="text" name="name" required />
-        </div>
+    <div class="section">
+      <label>Your Name:</label>
+      <input type="text" name="name" required />
+    </div>
 
-        <div class="section">
-            <label>Your Instagram @:</label>
-            <input type="text" name="instagram" required />
-        </div>
+    <div class="section">
+      <label>Your Instagram @:</label>
+      <input type="text" name="instagram" required />
+    </div>
 
-        <div class="section">
-            <label>Notes (optional):</label>
-            <textarea name="notes"></textarea>
-        </div>
+    <div class="section">
+      <label>Notes (optional):</label>
+      <textarea name="notes"></textarea>
+    </div>
 
-        <div class="price">Total: $20</div>
-        <button class="order-btn" type="submit">Place Order</button>
-    </form>
+    <div class="price">Total: $20</div>
+    <button class="order-btn" type="submit">Place Order</button>
+  </form>
 </div>
 
-<!-- EmailJS SDK -->
+<!-- Latest EmailJS SDK -->
 <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script>
-    // Initialize EmailJS
-    emailjs.init('i867MwdYbdGX-w0Dr'); // Your User ID
+<script type="text/javascript">
+  // Initialize EmailJS
+  emailjs.init('i867MwdYbdGX-w0Dr'); // <-- Your User ID
 
-    function sendEmail(e) {
-        e.preventDefault();
-        const templateParams = {
-            length: document.querySelector('select[name="length"]').value,
-            shape: document.querySelector('select[name="shape"]').value,
-            name: document.querySelector('input[name="name"]').value,
-            instagram: document.querySelector('input[name="instagram"]').value,
-            notes: document.querySelector('textarea[name="notes"]').value,
-            total: "$20"
-        };
+  document.getElementById('orderForm').addEventListener('submit', function(e) {
+    e.preventDefault();
 
-        emailjs.send('service_5k793mr', 'template_7gmubag', templateParams)
-            .then(() => {
-                alert("✅ Order sent! Check your inbox shortly.");
-                e.target.reset();
-            })
-            .catch(err => {
-                console.error(err);
-                alert("❌ Something went wrong. Please check console for details.");
-            });
-    }
+    const templateParams = {
+      length: this.length.value,
+      shape: this.shape.value,
+      name: this.name.value,
+      instagram: this.instagram.value,
+      notes: this.notes.value,
+      total: "$20"
+    };
+
+    emailjs.send('service_5k793mr', 'template_7gmubag', templateParams)
+      .then(function(response) {
+        alert("✅ Order sent! Check your inbox shortly.");
+        e.target.reset();
+      }, function(error) {
+        console.error('EmailJS error:', error);
+        alert("❌ Something went wrong. Check console for details.");
+      });
+  });
 </script>
 
 </body>
 </html>
+
 
