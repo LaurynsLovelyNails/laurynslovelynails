@@ -128,30 +128,32 @@
   </form>
 </div>
 
-<!-- Latest EmailJS SDK -->
-<script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script type="text/javascript">
-  // Initialize EmailJS
-  emailjs.init('i867MwdYbdGX-w0Dr'); // <-- Your User ID
+<!-- EmailJS Modular SDK -->
+<script type="module">
+  import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
 
-  document.getElementById('orderForm').addEventListener('submit', function(e) {
+  emailjs.init('i867MwdYbdGX-w0Dr'); // Your User ID
+
+  const form = document.getElementById('orderForm');
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const templateParams = {
-      length: this.length.value,
-      shape: this.shape.value,
-      name: this.name.value,
-      instagram: this.instagram.value,
-      notes: this.notes.value,
+      length: form.length.value,
+      shape: form.shape.value,
+      name: form.name.value,
+      instagram: form.instagram.value,
+      notes: form.notes.value,
       total: "$20"
     };
 
     emailjs.send('service_5k793mr', 'template_7gmubag', templateParams)
-      .then(function(response) {
+      .then(() => {
         alert("✅ Order sent! Check your inbox shortly.");
-        e.target.reset();
-      }, function(error) {
-        console.error('EmailJS error:', error);
+        form.reset();
+      })
+      .catch((err) => {
+        console.error('EmailJS error:', err);
         alert("❌ Something went wrong. Check console for details.");
       });
   });
@@ -159,5 +161,3 @@
 
 </body>
 </html>
-
-
