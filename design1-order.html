@@ -39,7 +39,7 @@
         }
 
         .section {
-            background: #d63384; /* dark pink */
+            background: #d63384;
             padding: 12px;
             border-radius: 12px;
             color: white;
@@ -83,12 +83,9 @@
 <body>
 
 <div class="container">
-    <!-- LEFT SIDE IMAGE -->
     <img src="design1.png" class="product-image" alt="Product" />
 
-    <!-- RIGHT SIDE OPTIONS -->
-    <form id="orderForm" class="options">
-        
+    <form id="orderForm" class="options" onsubmit="sendEmail(event)">
         <div class="section">
             <label>Choose Length:</label>
             <select name="length" required>
@@ -138,6 +135,30 @@
         <button class="order-btn" type="submit">Place Order</button>
     </form>
 </div>
+
+<script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init("i867MwdYbdGX-w0Dr"); // your EmailJS user ID
+   })();
+
+   function sendEmail(e){
+       e.preventDefault();
+       emailjs.send("service_5k793mr","template_7gmubag", {
+           length: document.querySelector('select[name="length"]').value,
+           shape: document.querySelector('select[name="shape"]').value,
+           name: document.querySelector('input[name="name"]').value,
+           instagram: document.querySelector('input[name="instagram"]').value,
+           notes: document.querySelector('textarea[name="notes"]').value,
+           total: "$20"
+       }).then(function(){
+           alert("Order sent! Check your email shortly.");
+           e.target.reset();
+       }, function(error){
+           alert("Oops... something went wrong. " + JSON.stringify(error));
+       });
+   }
+</script>
 
 </body>
 </html>
