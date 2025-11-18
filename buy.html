@@ -7,93 +7,22 @@
 <link rel="stylesheet" href="styles.css">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
 <style>
-body {
-    background-color: #fff0f5;
-    font-family: 'Cormorant Garamond', serif;
-    margin: 0;
-    padding: 0;
-}
-.site-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-}
-.site-nav .nav-links a {
-    margin-left: 15px;
-    text-decoration: none;
-    color: #333;
-    font-weight: 700;
-}
-.site-nav .nav-links a:hover {
-    color: hotpink;
-}
-.product-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    margin: 30px auto;
-}
-.product-card {
-    background-color: #fff0f5;
-    border-radius: 15px;
-    padding: 10px;
-    text-align: center;
-    flex: 1 1 200px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-.product-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-}
-.product-image {
-    width: 100%;
-    border-radius: 12px;
-}
-.product-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 700;
-    font-size: 20px;
-    margin: 8px 0;
-}
-.card-buy {
-    display: inline-block;
-    background-color: #ff66b2;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 700;
-    font-family: 'Playfair Display', serif;
-    margin-top: 6px;
-    transition: background 0.2s, transform 0.2s;
-}
-.card-buy:hover {
-    background-color: #ff99cc;
-    transform: scale(1.05);
-}
-h2 {
-    text-align: center;
-    color: hotpink;
-    margin-top: 30px;
-}
-p {
-    text-align: center;
-}
-.footer {
-    text-align: center;
-    margin-top: 50px;
-    padding: 15px 0;
-}
-.footer a {
-    color: hotpink;
-    text-decoration: none;
-}
-.footer a:hover {
-    text-decoration: underline;
-}
+body { background-color: #fff0f5; font-family: 'Cormorant Garamond', serif; margin: 0; padding: 0; }
+.site-nav { display: flex; justify-content: space-between; align-items: center; padding: 15px; }
+.site-nav .nav-links a { margin-left: 15px; text-decoration: none; color: #333; font-weight: 700; }
+.site-nav .nav-links a:hover { color: hotpink; }
+.product-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin: 30px auto; }
+.product-card { background-color: #fff0f5; border-radius: 15px; padding: 10px; text-align: center; flex: 1 1 200px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; }
+.product-card:hover { transform: scale(1.05); box-shadow: 0 6px 15px rgba(0,0,0,0.15); }
+.product-image { width: 100%; border-radius: 12px; }
+.product-name { font-weight: 700; font-size: 20px; margin: 8px 0; }
+.card-buy { display: inline-block; background-color: #ff66b2; color: white; padding: 8px 16px; border-radius: 12px; text-decoration: none; font-weight: 700; margin-top: 6px; transition: background 0.2s, transform 0.2s; }
+.card-buy:hover { background-color: #ff99cc; transform: scale(1.05); }
+h2 { text-align: center; color: hotpink; margin-top: 30px; }
+p { text-align: center; }
+.footer { text-align: center; margin-top: 50px; padding: 15px 0; }
+.footer a { color: hotpink; text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -114,14 +43,12 @@ p {
 <p>Click “Buy” to select your options and place your order.</p>
 
 <div class="product-grid">
-    <!-- Custom Designs -->
     <div class="product-card">
         <img src="images/Custom.png" alt="Custom Designs" class="product-image">
         <p class="product-name">Custom Designs</p>
         <a href="custom-designs.html" class="card-buy">Buy</a>
     </div>
 
-    <!-- Premade Designs -->
     <div class="product-card">
         <img src="images/design1.png" alt="Pretty Little Lady" class="product-image">
         <p class="product-name">Pretty Little Lady</p>
