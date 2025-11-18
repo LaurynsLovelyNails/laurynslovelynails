@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Page - Lauryn's Lovely Nails</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
     <style>
@@ -22,7 +22,7 @@
             background: white;
             padding: 15px;
             border-radius: 15px;
-            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
             max-width: 900px;
         }
 
@@ -136,7 +136,7 @@
     </form>
 </div>
 
-<!-- EmailJS script (non-module version) -->
+<!-- EmailJS SDK -->
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script>
     // Initialize EmailJS
@@ -144,7 +144,6 @@
 
     function sendEmail(e) {
         e.preventDefault();
-
         const templateParams = {
             length: document.querySelector('select[name="length"]').value,
             shape: document.querySelector('select[name="shape"]').value,
@@ -160,12 +159,11 @@
                 e.target.reset();
             })
             .catch(err => {
-                alert("❌ Something went wrong: " + JSON.stringify(err));
+                console.error(err);
+                alert("❌ Something went wrong. Please check console for details.");
             });
     }
 </script>
 
 </body>
 </html>
-
-
