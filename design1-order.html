@@ -139,12 +139,13 @@
 <!-- EmailJS integration -->
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script>
-    // Initialize EmailJS with your user ID
+    // Initialize EmailJS with your User ID
     emailjs.init("i867MwdYbdGX-w0Dr");
 
     function sendEmail(e) {
-        e.preventDefault(); // prevent default form submission
+        e.preventDefault(); // Prevent normal form submission
 
+        // Send the email using your Service and Template IDs
         emailjs.send("service_5k793mr", "template_7gmubag", {
             length: document.querySelector('select[name="length"]').value,
             shape: document.querySelector('select[name="shape"]').value,
@@ -154,14 +155,13 @@
             total: "$20"
         })
         .then(function() {
-            alert("Order sent! Check your email shortly.");
-            e.target.reset(); // reset the form
+            alert("✅ Order sent! Check your inbox shortly.");
+            e.target.reset(); // Clear the form
         }, function(error) {
-            alert("Oops... something went wrong. " + JSON.stringify(error));
+            alert("❌ Something went wrong: " + JSON.stringify(error));
         });
     }
 </script>
 
 </body>
 </html>
-
