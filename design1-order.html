@@ -136,32 +136,36 @@
     </form>
 </div>
 
-<!-- EmailJS integration -->
-<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script>
-    // Initialize EmailJS with your User ID
-    emailjs.init("i867MwdYbdGX-w0Dr");
+<!-- EmailJS new SDK -->
+<script type="module">
+    import emailjs from 'https://cdn.emailjs.com/dist/emailjs.browser.min.mjs';
 
-    function sendEmail(e) {
-        e.preventDefault(); // Prevent normal form submission
+    emailjs.init('i867MwdYbdGX-w0Dr'); // Your User ID
 
-        // Send the email using your Service and Template IDs
-        emailjs.send("service_5k793mr", "template_7gmubag", {
+    window.sendEmail = function(e) {
+        e.preventDefault();
+
+        const templateParams = {
             length: document.querySelector('select[name="length"]').value,
             shape: document.querySelector('select[name="shape"]').value,
             name: document.querySelector('input[name="name"]').value,
             instagram: document.querySelector('input[name="instagram"]').value,
             notes: document.querySelector('textarea[name="notes"]').value,
             total: "$20"
-        })
-        .then(function() {
-            alert("✅ Order sent! Check your inbox shortly.");
-            e.target.reset(); // Clear the form
-        }, function(error) {
-            alert("❌ Something went wrong: " + JSON.stringify(error));
-        });
+        };
+
+        emailjs.send('service_5k793mr', 'template_7gmubag', templateParams)
+            .then(() => {
+                alert("✅ Order sent! Check your inbox shortly.");
+                e.target.reset();
+            })
+            .catch(err => {
+                alert("❌ Something went wrong: " + JSON.stringify(err));
+            });
     }
 </script>
 
 </body>
 </html>
+
+
