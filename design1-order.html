@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Order Page</title>
+    <title>Order Page - Lauryn's Lovely Nails</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
     <style>
         body {
@@ -77,14 +77,15 @@
         .order-btn:hover {
             background: #e04494;
         }
-
     </style>
 </head>
 <body>
 
 <div class="container">
+    <!-- LEFT: Product Image -->
     <img src="design1.png" class="product-image" alt="Product" />
 
+    <!-- RIGHT: Order Form -->
     <form id="orderForm" class="options" onsubmit="sendEmail(event)">
         <div class="section">
             <label>Choose Length:</label>
@@ -131,34 +132,36 @@
         </div>
 
         <div class="price">Total: $20</div>
-
         <button class="order-btn" type="submit">Place Order</button>
     </form>
 </div>
 
-<script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script type="text/javascript">
-   (function(){
-      emailjs.init("i867MwdYbdGX-w0Dr"); // your EmailJS user ID
-   })();
+<!-- EmailJS integration -->
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+    // Initialize EmailJS with your user ID
+    emailjs.init("i867MwdYbdGX-w0Dr");
 
-   function sendEmail(e){
-       e.preventDefault();
-       emailjs.send("service_5k793mr","template_7gmubag", {
-           length: document.querySelector('select[name="length"]').value,
-           shape: document.querySelector('select[name="shape"]').value,
-           name: document.querySelector('input[name="name"]').value,
-           instagram: document.querySelector('input[name="instagram"]').value,
-           notes: document.querySelector('textarea[name="notes"]').value,
-           total: "$20"
-       }).then(function(){
-           alert("Order sent! Check your email shortly.");
-           e.target.reset();
-       }, function(error){
-           alert("Oops... something went wrong. " + JSON.stringify(error));
-       });
-   }
+    function sendEmail(e) {
+        e.preventDefault(); // prevent default form submission
+
+        emailjs.send("service_5k793mr", "template_7gmubag", {
+            length: document.querySelector('select[name="length"]').value,
+            shape: document.querySelector('select[name="shape"]').value,
+            name: document.querySelector('input[name="name"]').value,
+            instagram: document.querySelector('input[name="instagram"]').value,
+            notes: document.querySelector('textarea[name="notes"]').value,
+            total: "$20"
+        })
+        .then(function() {
+            alert("Order sent! Check your email shortly.");
+            e.target.reset(); // reset the form
+        }, function(error) {
+            alert("Oops... something went wrong. " + JSON.stringify(error));
+        });
+    }
 </script>
 
 </body>
 </html>
+
