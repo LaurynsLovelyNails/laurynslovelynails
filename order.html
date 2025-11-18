@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Order - Lauryn's Lovely Nails</title>
 <link rel="stylesheet" href="styles.css">
 <style>
-body { font-family: 'Cormorant Garamond', serif; background-color: #fff0f5; margin: 0; padding: 0; }
-.container { max-width: 900px; margin: 0 auto; padding: 20px; display: flex; flex-wrap: wrap; gap: 20px; }
-.left, .right { flex: 1 1 400px; }
-.left img { width: 100%; border-radius: 12px; }
-.right { display: flex; flex-direction: column; gap: 10px; }
-label { font-weight: 700; }
-select, input { padding: 8px; border-radius: 8px; border: 1px solid #ccc; width: 100%; }
-.total { font-weight: 700; font-size: 20px; color: hotpink; margin-top: 10px; }
-button { background-color: #ff66b2; color: white; padding: 10px; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; }
-button:hover { background-color: #ff99cc; }
+body { font-family: 'Cormorant Garamond', serif; background-color: #fff0f5; margin:0; padding:0; }
+.container { max-width:900px; margin:0 auto; padding:20px; display:flex; flex-wrap:wrap; gap:20px; }
+.left, .right { flex:1 1 400px; }
+.left img { width:100%; border-radius:12px; }
+.right { display:flex; flex-direction:column; gap:10px; }
+label { font-weight:700; }
+select,input { padding:8px; border-radius:8px; border:1px solid #ccc; width:100%; }
+.total { font-weight:700; font-size:20px; color:hotpink; margin-top:10px; }
+button { background-color:#ff66b2; color:white; padding:10px; border:none; border-radius:12px; font-weight:700; cursor:pointer; }
+button:hover { background-color:#ff99cc; }
 </style>
 </head>
 <body>
 
 <div class="container">
     <div class="left">
-        <img id="designImage" src="" alt="Design">
+        <!-- Placeholder image for now -->
+        <img id="designImage" src="https://via.placeholder.com/400x400.png?text=Design+Image" alt="Design">
     </div>
     <div class="right">
-        <h2 id="designName"></h2>
+        <h2 id="designName">Design Name</h2>
 
         <label for="length">Nail Length:</label>
         <select id="length">
@@ -66,19 +67,17 @@ const params = new URLSearchParams(window.location.search);
 const designName = params.get('design') || 'Unknown Design';
 const basePrice = parseFloat(params.get('price')) || 0;
 
-// Set design image and name
+// Update name
 document.getElementById('designName').textContent = designName;
-document.getElementById('designImage').src = `images/${designName.replace(/\s/g,'')}.png`;
-document.getElementById('designImage').alt = designName;
 
+// Price calculation
 const lengthEl = document.getElementById('length');
 const totalEl = document.querySelector('.total');
 
 function updateTotal() {
     let price = basePrice;
-    const length = lengthEl.value;
-    if (length === "XXL") price += 1;
-    if (length === "XXXL") price += 2;
+    if(lengthEl.value === "XXL") price +=1;
+    if(lengthEl.value === "XXXL") price +=2;
     totalEl.textContent = `Total: $${price}`;
 }
 
@@ -86,9 +85,10 @@ lengthEl.addEventListener('change', updateTotal);
 updateTotal();
 
 function placeOrder() {
-    alert(`Order placed for ${designName}!\nTotal: ${totalEl.textContent}`);
+    alert(`Order placed for ${designName}!\n${totalEl.textContent}\nName: ${document.getElementById('fullName').value}\nContact: ${document.getElementById('contact').value}`);
 }
 </script>
 
 </body>
 </html>
+
