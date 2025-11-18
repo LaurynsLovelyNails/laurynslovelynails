@@ -1,73 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Buy Nails - Lauryn's Lovely Nails</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Buy Nails - Lauryn's Lovely Nails</title>
+<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<style>
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+.product-card {
+    background-color: #fff0f5;
+    border-radius: 15px;
+    padding: 10px;
+    text-align: center;
+    flex: 1 1 200px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.product-image {
+    width: 100%;
+    border-radius: 12px;
+}
+.product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 8px 0;
+}
+.card-buy {
+    display: inline-block;
+    background-color: #ff66b2;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 700;
+    font-family: 'Playfair Display', serif;
+    margin-top: 6px;
+}
+.card-buy:hover {
+    background-color: #ff99cc;
+}
+</style>
 </head>
 <body>
-<div class="container">
 
-    <nav class="site-nav" aria-label="Primary">
-        <a href="index.html"><img src="logo.png" alt="Lauryn's Lovely Nails logo" class="logo"></a>
-        <div class="nav-links" role="navigation">
-            <a href="index.html">Home</a>
-            <a href="buy.html">Buy</a>
-            <a href="nail-sizing.html">Nail Sizing</a>
-            <a href="custom-designs.html">Custom</a>
-            <a href="contact.html">Contact</a>
-        </div>
-    </nav>
+<nav class="site-nav">
+    <a href="index.html"><img src="logo.png" alt="Lauryn's Lovely Nails" class="logo"></a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="buy.html">Buy</a>
+        <a href="nail-sizing.html">Nail Sizing</a>
+        <a href="custom-designs.html">Custom</a>
+        <a href="contact.html">Contact</a>
+    </div>
+</nav>
 
-    <main>
-        <h2>Buy Our Nails</h2>
-        <p class="muted">Click "Buy" to select your length & shape and place your order.</p>
+<main>
+<h2>Buy Our Nails</h2>
+<p>Click “Buy” to select your options and place your order.</p>
 
-        <div class="product-grid" role="list">
-            <!-- Each product card links to its own order page -->
-            <div class="product-card" role="listitem">
-                <img src="design1.png" alt="Pretty Little Lady" class="product-image">
-                <p class="product-name">Pretty Little Lady</p>
-                <div class="price-row">
-                    <span class="price">$20</span>
-                    <a class="card-buy" href="design1-order.html">Buy</a>
-                </div>
-            </div>
+<div class="product-grid">
+    <!-- Custom Designs -->
+    <div class="product-card">
+        <img src="custom.png" alt="Custom Designs" class="product-image">
+        <p class="product-name">Custom Designs</p>
+        <a href="custom-designs.html" class="card-buy">Buy</a>
+    </div>
 
-            <div class="product-card" role="listitem">
-                <img src="design2.png" alt="Bubble Blossom" class="product-image">
-                <p class="product-name">Bubble Blossom</p>
-                <div class="price-row">
-                    <span class="price">$12</span>
-                    <a class="card-buy" href="design2-order.html">Buy</a>
-                </div>
-            </div>
-
-            <div class="product-card" role="listitem">
-                <img src="design3.png" alt="Glitter Dream" class="product-image">
-                <p class="product-name">Glitter Dream</p>
-                <div class="price-row">
-                    <span class="price">$13</span>
-                    <a class="card-buy" href="design3-order.html">Buy</a>
-                </div>
-            </div>
-
-            <!-- Repeat for other designs -->
-        </div>
-
-        <p><a href="index.html" class="pink-button">Back to Home</a></p>
-    </main>
-
-    <footer class="footer">
-        <p>© 2025 Lauryn’s Lovely Nails · <a href="contact.html" class="pink-link">DM to order</a></p>
-    </footer>
+    <!-- Premade Designs -->
+    <div class="product-card">
+        <img src="design1.png" alt="Pretty Little Lady" class="product-image">
+        <p class="product-name">Pretty Little Lady</p>
+        <a href="design1-order.html" class="card-buy">Buy</a>
+    </div>
+    <div class="product-card">
+        <img src="design2.png" alt="Bubble Blossom" class="product-image">
+        <p class="product-name">Bubble Blossom</p>
+        <a href="design2-order.html" class="card-buy">Buy</a>
+    </div>
+    <div class="product-card">
+        <img src="design3.png" alt="Glitter Dream" class="product-image">
+        <p class="product-name">Glitter Dream</p>
+        <a href="design3-order.html" class="card-buy">Buy</a>
+    </div>
+    <div class="product-card">
+        <img src="design4.png" alt="Rosy Edge" class="product-image">
+        <p class="product-name">Rosy Edge</p>
+        <a href="design4-order.html" class="card-buy">Buy</a>
+    </div>
+    <div class="product-card">
+        <img src="design5.png" alt="Midnight Sparkle" class="product-image">
+        <p class="product-name">Midnight Sparkle</p>
+        <a href="design5-order.html" class="card-buy">Buy</a>
+    </div>
+    <div class="product-card">
+        <img src="design6.png" alt="Pastel Clouds" class="product-image">
+        <p class="product-name">Pastel Clouds</p>
+        <a href="design6-order.html" class="card-buy">Buy</a>
+    </div>
+    <div class="product-card">
+        <img src="design7.png" alt="Lily Dots" class="product-image">
+        <p class="product-name">Lily Dots</p>
+        <a href="design7-order.html" class="card-buy">Buy</a>
+    </div>
+    <div class="product-card">
+        <img src="design8.png" alt="Sun-kissed" class="product-image">
+        <p class="product-name">Sun-kissed</p>
+        <a href="design8-order.html" class="card-buy">Buy</a>
+    </div>
 </div>
+</main>
+
+<footer class="footer">
+<p>© 2025 Lauryn’s Lovely Nails · <a href="contact.html" class="pink-link">DM to order</a></p>
+</footer>
+
 </body>
 </html>
-
-
-
-
-
-
