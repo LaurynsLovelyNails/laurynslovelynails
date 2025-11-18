@@ -3,8 +3,117 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Lauryn's Lovely Nails</title>
+    <title>Order - Lauryn's Lovely Nails</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Page background */
+        body {
+            background-color: #fff0f5;
+        }
+
+        /* Order section header */
+        .order-section h2 {
+            text-align: center;
+            color: hotpink;
+            margin-bottom: 20px;
+        }
+
+        /* Product grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        /* Design cards */
+        .design {
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+            background: white;
+            text-align: center;
+        }
+        .design:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        .design.selected {
+            border-color: hotpink;
+            box-shadow: 0 0 15px hotpink;
+        }
+
+        .product-image {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .product-name {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .price-row {
+            margin-top: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* Form styling */
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 400px;
+            margin: 0 auto 40px auto;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, select {
+            padding: 10px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 100%;
+        }
+
+        input:focus, select:focus {
+            border-color: hotpink;
+            outline: none;
+        }
+
+        .total {
+            font-size: 1.3em;
+            font-weight: bold;
+            text-align: center;
+            color: hotpink;
+            margin-top: 10px;
+        }
+
+        .pink-button {
+            background: hotpink;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .pink-button:hover {
+            background: deeppink;
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -23,59 +132,64 @@
 
         <!-- HERO -->
         <header class="hero" role="banner">
-            <h1>Lauryn's Lovely Nails</h1>
-            <p class="lead">Handmade press-on nails crafted with care by Lauryn — gentle, playful, and all made with love. DM on Instagram to order or to save your sizing for future orders.</p>
-            <p><a href="buy.html" class="pink-button">Shop Nails</a></p>
+            <h1>Place Your Order</h1>
+            <p class="lead">Choose your favorite design, select your length and shape, and enter your info below. Total price updates automatically.</p>
         </header>
 
-        <!-- ABOUT + SIZING -->
-        <div class="info-container" role="region" aria-label="About and sizing">
-            <section class="info-card">
-                <h2>About Lauryn</h2>
-                <p>Hi — I’m Lauryn, a 14-year-old making press-on nails as a small business. Every nail I make is made with patience and care. I started after seeing other young nail artists find success on social media, and decided to try too. Thank you for considering supporting my dream!</p>
-            </section>
-
-            <section class="info-card">
-                <h2>How to Size</h2>
-                <p>Want nails that fit perfectly? Click below for a quick step-by-step guide on how to size and send me your photos.</p>
-                <p><a href="nail-sizing.html" class="pink-button">Learn Nail Sizing</a></p>
-            </section>
-        </div>
-
-        <!-- FEATURED -->
-        <section>
-            <h2 style="margin-top: 8px;">Featured Designs</h2>
+        <!-- ORDER FORM -->
+        <section class="order-section">
+            <h2>Select Your Design</h2>
             <div class="product-grid" aria-live="polite">
-                <div class="product-card">
-                    <img src="design1.png" alt="Pretty little lady design" class="product-image">
+                <div class="product-card design" data-name="Pretty Little Lady" data-price="12">
+                    <img src="design1.png" alt="Pretty Little Lady design" class="product-image">
                     <p class="product-name">Pretty Little Lady</p>
-                    <div class="price-row"><span class="price">$12</span><a class="card-buy" href="buy.html">Buy</a></div>
+                    <div class="price-row"><span class="price">$12</span></div>
                 </div>
-                <div class="product-card">
-                    <img src="design2.png" alt="Design 2" class="product-image">
+                <div class="product-card design" data-name="Bubble Blossom" data-price="12">
+                    <img src="design2.png" alt="Bubble Blossom design" class="product-image">
                     <p class="product-name">Bubble Blossom</p>
-                    <div class="price-row"><span class="price">$12</span><a class="card-buy" href="buy.html">Buy</a></div>
+                    <div class="price-row"><span class="price">$12</span></div>
                 </div>
-                <div class="product-card">
-                    <img src="design3.png" alt="Design 3" class="product-image">
+                <div class="product-card design" data-name="Glitter Dream" data-price="13">
+                    <img src="design3.png" alt="Glitter Dream design" class="product-image">
                     <p class="product-name">Glitter Dream</p>
-                    <div class="price-row"><span class="price">$13</span><a class="card-buy" href="buy.html">Buy</a></div>
-                </div>
-                <div class="product-card custom">
-                    <a href="custom-designs.html" class="pink-link" aria-label="Custom designs">
-                        <img src="custom.png" alt="Custom designs" class="product-image">
-                        <p class="product-name">Custom Designs</p>
-                        <div class="price-row"><span class="price">Custom</span><span class="muted">DM to order</span></div>
-                    </a>
+                    <div class="price-row"><span class="price">$13</span></div>
                 </div>
             </div>
-        </section>
 
-        <!-- CONTACT CALL-OUT -->
-        <section class="contact-wrap" aria-label="Contact">
-            <h2>Ready to order?</h2>
-            <p class="muted">DM me on Instagram: <a href="https://instagram.com/laurynslovelynails" target="_blank" rel="noopener" class="pink-link">@laurynslovelynails</a></p>
-            <p><a href="contact.html" class="pink-button">Contact & Ordering Info</a></p>
+            <form id="orderForm">
+                <label for="length">Nail Length:</label>
+                <select id="length" required>
+                    <option value="XXS">XXS</option>
+                    <option value="XS">XS</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="MM">MM</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                    <option value="XXL">XXL (+$1)</option>
+                    <option value="XXXL">XXXL (+$2)</option>
+                </select>
+
+                <label for="shape">Nail Shape:</label>
+                <select id="shape" required>
+                    <option value="Rounded">Rounded</option>
+                    <option value="Square">Square</option>
+                    <option value="Almond">Almond</option>
+                    <option value="Coffin">Coffin</option>
+                    <option value="Stiletto">Stiletto</option>
+                </select>
+
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" placeholder="Your Full Name" required>
+
+                <label for="contact">Instagram or Gmail:</label>
+                <input type="text" id="contact" placeholder="@instagram or email" required>
+
+                <div class="total">Total: $0</div>
+
+                <button type="submit" class="pink-button">Send Order</button>
+            </form>
         </section>
 
         <!-- FOOTER -->
@@ -85,8 +199,71 @@
         </footer>
 
     </div>
+
+    <script>
+        let selectedDesign = null;
+        const designs = document.querySelectorAll('.design');
+        const totalEl = document.querySelector('.total');
+
+        designs.forEach(design => {
+            design.addEventListener('click', () => {
+                designs.forEach(d => d.classList.remove('selected'));
+                design.classList.add('selected');
+                selectedDesign = {
+                    name: design.dataset.name,
+                    basePrice: parseFloat(design.dataset.price)
+                };
+                updateTotal();
+            });
+        });
+
+        const lengthEl = document.getElementById('length');
+        lengthEl.addEventListener('change', updateTotal);
+
+        function updateTotal() {
+            if (!selectedDesign) return totalEl.textContent = "Total: $0";
+            let price = selectedDesign.basePrice;
+            const length = lengthEl.value;
+
+            if (length === "XXL") price += 1;
+            if (length === "XXXL") price += 2;
+
+            totalEl.textContent = `Total: $${price}`;
+        }
+
+        document.getElementById('orderForm').addEventListener('submit', e => {
+            e.preventDefault();
+            if (!selectedDesign) return alert("Please select a design!");
+
+            const orderData = {
+                design: selectedDesign.name,
+                length: lengthEl.value,
+                shape: document.getElementById('shape').value,
+                name: document.getElementById('name').value,
+                contact: document.getElementById('contact').value,
+                total: parseFloat(totalEl.textContent.replace("Total: $", ""))
+            };
+
+            fetch('http://localhost:3000/orders', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(orderData)
+            })
+            .then(res => res.json())
+            .then(data => {
+                alert(data.message);
+                e.target.reset();
+                selectedDesign = null;
+                designs.forEach(d => d.classList.remove('selected'));
+                totalEl.textContent = "Total: $0";
+            })
+            .catch(err => {
+                console.error('Error sending order:', err);
+                alert('Something went wrong. Please try again.');
+            });
+        });
+    </script>
 </body>
 </html>
-
 
 
