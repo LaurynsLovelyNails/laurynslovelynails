@@ -6,33 +6,19 @@
 <title>Order - Lauryn's Lovely Nails</title>
 <link rel="stylesheet" href="styles.css">
 <style>
-body { font-family: 'Cormorant Garamond', serif; background:#fff0f5; margin:0; padding:0; }
-.site-nav { display:flex; justify-content:space-between; align-items:center; padding:15px; background:white; box-shadow:0 2px 6px rgba(0,0,0,0.1);}
-.site-nav .nav-links a { margin-left:15px; text-decoration:none; color:#333; font-weight:700; }
-.site-nav .nav-links a:hover { color:hotpink; }
-.container { max-width:900px; margin:20px auto; padding:20px; display:flex; flex-wrap:wrap; gap:20px; background:white; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1);}
-.left, .right { flex:1 1 400px;}
-.left img { width:100%; border-radius:12px;}
-.right { display:flex; flex-direction:column; gap:10px;}
-label { font-weight:700;}
-select,input { padding:8px; border-radius:8px; border:1px solid #ccc; width:100%;}
-.total { font-weight:700; font-size:20px; color:hotpink; margin-top:10px;}
-button { background:#ff66b2; color:white; padding:10px; border:none; border-radius:12px; font-weight:700; cursor:pointer;}
-button:hover { background:#ff99cc;}
+body { font-family: 'Cormorant Garamond', serif; background-color: #fff0f5; margin:0; padding:0; }
+.container { max-width:900px; margin:0 auto; padding:20px; display:flex; flex-wrap:wrap; gap:20px; }
+.left, .right { flex:1 1 400px; }
+.left img { width:100%; border-radius:12px; }
+.right { display:flex; flex-direction:column; gap:10px; }
+label { font-weight:700; }
+select,input { padding:8px; border-radius:8px; border:1px solid #ccc; width:100%; }
+.total { font-weight:700; font-size:20px; color:hotpink; margin-top:10px; }
+button { background-color:#ff66b2; color:white; padding:10px; border:none; border-radius:12px; font-weight:700; cursor:pointer; }
+button:hover { background-color:#ff99cc; }
 </style>
 </head>
 <body>
-
-<nav class="site-nav">
-    <a href="index.html"><img src="logo.png" alt="Lauryn's Lovely Nails logo" style="height:50px;"></a>
-    <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="buy.html">Buy</a>
-        <a href="nail-sizing.html">Nail Sizing</a>
-        <a href="custom-designs.html">Custom</a>
-        <a href="contact.html">Contact</a>
-    </div>
-</nav>
 
 <div class="container">
     <div class="left">
@@ -76,17 +62,14 @@ button:hover { background:#ff99cc;}
 </div>
 
 <script>
-// Get URL params
 const params = new URLSearchParams(window.location.search);
 const designName = params.get('design') || 'Unknown Design';
 const basePrice = parseFloat(params.get('price')) || 0;
 const imgFile = params.get('img') || 'placeholder.png';
 
-// Update design name and image
 document.getElementById('designName').textContent = designName;
 document.getElementById('designImage').src = `images/${imgFile}`;
 
-// Update price
 const lengthEl = document.getElementById('length');
 const totalEl = document.querySelector('.total');
 
@@ -96,10 +79,10 @@ function updateTotal() {
     if(lengthEl.value === "XXXL") price +=2;
     totalEl.textContent = `Total: $${price}`;
 }
+
 lengthEl.addEventListener('change', updateTotal);
 updateTotal();
 
-// Place order
 function placeOrder() {
     alert(`Order placed for ${designName}!\n${totalEl.textContent}\nName: ${document.getElementById('fullName').value}\nContact: ${document.getElementById('contact').value}`);
 }
