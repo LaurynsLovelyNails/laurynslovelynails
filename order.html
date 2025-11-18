@@ -1,13 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Order - Lauryn's Lovely Nails</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+body { font-family: 'Cormorant Garamond', serif; background-color: #fff0f5; margin: 0; padding: 0; }
+.container { max-width: 900px; margin: 0 auto; padding: 20px; display: flex; flex-wrap: wrap; gap: 20px; }
+.left, .right { flex: 1 1 400px; }
+.left img { width: 100%; border-radius: 12px; }
+.right { display: flex; flex-direction: column; gap: 10px; }
+label { font-weight: 700; }
+select, input { padding: 8px; border-radius: 8px; border: 1px solid #ccc; width: 100%; }
+.total { font-weight: 700; font-size: 20px; color: hotpink; margin-top: 10px; }
+button { background-color: #ff66b2; color: white; padding: 10px; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; }
+button:hover { background-color: #ff99cc; }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="left">
+        <img id="designImage" src="" alt="Design">
+    </div>
+    <div class="right">
+        <h2 id="designName"></h2>
+
+        <label for="length">Nail Length:</label>
+        <select id="length">
+            <option value="XXS">XXS</option>
+            <option value="XS">XS</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="MM">MM</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL (+$1)</option>
+            <option value="XXXL">XXXL (+$2)</option>
+        </select>
+
+        <label for="shape">Nail Shape:</label>
+        <select id="shape">
+            <option value="rounded">Rounded</option>
+            <option value="square">Square</option>
+            <option value="almond">Almond</option>
+            <option value="coffin">Coffin</option>
+            <option value="stiletto">Stiletto</option>
+        </select>
+
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" placeholder="Your full name">
+
+        <label for="contact">Instagram or Gmail:</label>
+        <input type="text" id="contact" placeholder="Your Instagram or Gmail">
+
+        <div class="total">Total: $0</div>
+
+        <button onclick="placeOrder()">Place Order</button>
+    </div>
+</div>
+
+<script>
 const params = new URLSearchParams(window.location.search);
-const designName = params.get('design');
-const basePrice = parseFloat(params.get('price'));
+const designName = params.get('design') || 'Unknown Design';
+const basePrice = parseFloat(params.get('price')) || 0;
+
+// Set design image and name
 document.getElementById('designName').textContent = designName;
-document.getElementById('designImage').src = `images/${designName.replace(/\s/g, '')}.png`;
+document.getElementById('designImage').src = `images/${designName.replace(/\s/g,'')}.png`;
 document.getElementById('designImage').alt = designName;
 
-// Price update logic
 const lengthEl = document.getElementById('length');
 const totalEl = document.querySelector('.total');
+
 function updateTotal() {
     let price = basePrice;
     const length = lengthEl.value;
@@ -15,5 +81,14 @@ function updateTotal() {
     if (length === "XXXL") price += 2;
     totalEl.textContent = `Total: $${price}`;
 }
+
 lengthEl.addEventListener('change', updateTotal);
 updateTotal();
+
+function placeOrder() {
+    alert(`Order placed for ${designName}!\nTotal: ${totalEl.textContent}`);
+}
+</script>
+
+</body>
+</html>
