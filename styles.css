@@ -45,11 +45,15 @@ body {
     flex-wrap: wrap;
 }
 
-.logo {
-    max-width: 350px;
-    border-radius: 18px;
+/* Logo in navbar */
+.site-nav .logo {
+    max-width: 120px;      /* Adjust size as needed */
+    height: auto;          /* Maintain aspect ratio */
+    border-radius: 12px;   /* Optional */
     display: block;
-    margin: 0 auto;
+    margin: 0;             /* Remove auto-centering */
+}
+
 }
 
 /* center nav links on wide screens, stack on small screens */
@@ -332,5 +336,6 @@ body {
         font-size: 28px;
     }
 }
+
 
 
