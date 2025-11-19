@@ -154,7 +154,7 @@ Name: ${fullName}
 Contact: ${contact}
 `;
 
-    fetch("http://localhost:3000/order", {
+  fetch("https://order-backend-qesa.onrender.com/order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
