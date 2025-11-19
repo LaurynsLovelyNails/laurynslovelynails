@@ -1,5 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order - Lauryn's Lovely Nails</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+body { font-family: 'Cormorant Garamond', serif; background-color: #fff0f5; margin:0; padding:0; }
+.site-nav { display: flex; justify-content: space-between; align-items: center; padding: 15px; background-color:#fff; box-shadow:0 2px 5px rgba(0,0,0,0.1);}
+.site-nav .nav-links a { margin-left: 15px; text-decoration: none; color: #333; font-weight: 700; }
+.site-nav .nav-links a:hover { color: hotpink; }
+.container { max-width:900px; margin:20px auto; padding:20px; display:flex; flex-wrap:wrap; gap:20px; }
+.left, .right { flex:1 1 400px; }
+.left img { width:100%; border-radius:12px; }
+.right { display:flex; flex-direction:column; gap:10px; }
+label { font-weight:700; }
+select,input { padding:8px; border-radius:8px; border:1px solid #ccc; width:100%; }
+.total { font-weight:700; font-size:20px; color:hotpink; margin-top:10px; }
+button { background-color:#ff66b2; color:white; padding:10px; border:none; border-radius:12px; font-weight:700; cursor:pointer; }
+button:hover { background-color:#ff99cc; }
+h2 { color: hotpink; margin:0; }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION BAR -->
 <nav class="site-nav">
-    <!-- Logo -->
     <a href="index.html"><img src="images/logo.png" alt="Lauryn's Lovely Nails logo" class="logo" style="height:50px;"></a>
     <div class="nav-links">
         <a href="index.html">Home</a>
@@ -10,15 +36,14 @@
     </div>
 </nav>
 
+<!-- ORDER SECTION -->
 <div class="container">
     <div class="left">
-        <!-- Design image -->
-        <img id="designImage" src="" alt="Design">
+        <img id="designImage" src="images/placeholder.png" alt="Design Image">
     </div>
     <div class="right">
         <h2 id="designName">Design Name</h2>
 
-        <!-- Options -->
         <label for="length">Nail Length:</label>
         <select id="length">
             <option value="XXS">XXS</option>
@@ -54,20 +79,15 @@
 </div>
 
 <script>
-// Get URL parameters
+// Get parameters from URL
 const params = new URLSearchParams(window.location.search);
 const designName = params.get('design') || 'Unknown Design';
 const basePrice = parseFloat(params.get('price')) || 0;
-let imgFile = params.get('img') || 'placeholder.png';
+const designImg = params.get('img') || 'custom.png';
 
-// Handle custom designs
-if(designName.toLowerCase().includes("custom")) {
-    imgFile = "custom.png"; // point to your custom design image
-}
-
-// Update name and image
+// Set dynamic content
 document.getElementById('designName').textContent = designName;
-document.getElementById('designImage').src = `images/${imgFile}`;
+document.getElementById('designImage').src = `images/${designImg}`;
 
 // Price calculation
 const lengthEl = document.getElementById('length');
@@ -83,9 +103,12 @@ function updateTotal() {
 lengthEl.addEventListener('change', updateTotal);
 updateTotal();
 
+// Place order alert
 function placeOrder() {
     alert(`Order placed for ${designName}!\n${totalEl.textContent}\nName: ${document.getElementById('fullName').value}\nContact: ${document.getElementById('contact').value}`);
 }
 </script>
 
+</body>
+</html>
 
