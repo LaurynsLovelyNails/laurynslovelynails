@@ -20,10 +20,11 @@
     </div>
 </nav>
 
-<div class="container">
+<main class="container">
     <div class="left">
-        <img id="designImage" src="" alt="Design">
+        <img id="designImage" src="" alt="Design" class="product-image">
     </div>
+
     <div class="right">
         <h2 id="designName">Design Name</h2>
 
@@ -56,11 +57,13 @@
         <input type="text" id="contact" placeholder="Your Instagram or Gmail" required>
 
         <div class="total">Total: $0</div>
+
         <button onclick="placeOrder()">Place Order</button>
     </div>
-</div>
+</main>
 
 <script>
+// Get URL params
 const params = new URLSearchParams(window.location.search);
 const designNameParam = params.get('design') || 'Unknown Design';
 const basePrice = parseFloat(params.get('price')) || 0;
@@ -81,6 +84,7 @@ function updateTotal() {
     if(lengthEl.value === "XXXL") price +=2;
     totalEl.textContent = `Total: $${price}`;
 }
+
 lengthEl.addEventListener('change', updateTotal);
 updateTotal();
 
