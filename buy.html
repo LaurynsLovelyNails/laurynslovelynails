@@ -5,20 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Buy Nails - Lauryn's Lovely Nails</title>
 <link rel="stylesheet" href="styles.css">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@300;400;700&display=swap" rel="stylesheet">
-<style>
-/* Override logo size for buy page */
-.site-nav .logo {
-    max-width: 220px; /* bigger logo */
-    height: auto;
-}
-</style>
 </head>
 <body>
 
 <!-- NAVBAR -->
 <nav class="site-nav">
-    <a href="index.html"><img src="images/logo.png" alt="Lauryn's Lovely Nails logo" class="logo"></a>
+    <a href="index.html"><img src="images/logo.png" alt="Lauryn's Lovely Nails" class="logo"></a>
     <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="buy.html">Buy</a>
@@ -28,39 +20,70 @@
     </div>
 </nav>
 
-<main>
-<h2>Buy Our Nails</h2>
-<p>Click “Buy” to select your options and place your order.</p>
+<h2 style="text-align:center;color:hotpink;">Buy Our Nails</h2>
+<p style="text-align:center;">Click “Buy” to select your options and place your order.</p>
 
 <div class="product-grid">
-    <!-- Product cards will be dynamically loaded here -->
+    <!-- Custom -->
+    <div class="product-card custom">
+        <img src="images/custom.png" alt="Custom Design" class="product-image">
+        <p class="product-name">Custom Design</p>
+        <a href="custom-designs.html" class="card-buy">Buy</a>
+    </div>
+
+    <!-- Premade Designs -->
+    <div class="product-card">
+        <img src="images/design1.png" alt="Pretty Little Lady" class="product-image">
+        <p class="product-name">Pretty Little Lady</p>
+        <a href="order.html?design=Pretty%20Little%20Lady&price=12&img=design1.png" class="card-buy">Buy</a>
+    </div>
+
+    <div class="product-card">
+        <img src="images/design2.png" alt="Very Hungry Caterpillar" class="product-image">
+        <p class="product-name">Very Hungry Caterpillar</p>
+        <a href="order.html?design=Very%20Hungry%20Caterpillar&price=12&img=design2.png" class="card-buy">Buy</a>
+    </div>
+
+    <div class="product-card">
+        <img src="images/design3.png" alt="Glitter Dream" class="product-image">
+        <p class="product-name">Glitter Dream</p>
+        <a href="order.html?design=Glitter%20Dream&price=13&img=design3.png" class="card-buy">Buy</a>
+    </div>
+
+    <div class="product-card">
+        <img src="images/design4.png" alt="Rosy Edge" class="product-image">
+        <p class="product-name">Rosy Edge</p>
+        <a href="order.html?design=Rosy%20Edge&price=13&img=design4.png" class="card-buy">Buy</a>
+    </div>
+
+    <div class="product-card">
+        <img src="images/design5.png" alt="Midnight Sparkle" class="product-image">
+        <p class="product-name">Midnight Sparkle</p>
+        <a href="order.html?design=Midnight%20Sparkle&price=14&img=design5.png" class="card-buy">Buy</a>
+    </div>
+
+    <div class="product-card">
+        <img src="images/design6.png" alt="Pastel Clouds" class="product-image">
+        <p class="product-name">Pastel Clouds</p>
+        <a href="order.html?design=Pastel%20Clouds&price=13&img=design6.png" class="card-buy">Buy</a>
+    </div>
+
+    <div class="product-card">
+        <img src="images/design7.png" alt="Lily Dots" class="product-image">
+        <p class="product-name">Lily Dots</p>
+        <a href="order.html?design=Lily%20Dots&price=12&img=design7.png" class="card-buy">Buy</a>
+    </div>
+
+    <div class="product-card">
+        <img src="images/design8.png" alt="Sun-kissed" class="product-image">
+        <p class="product-name">Sun-kissed</p>
+        <a href="order.html?design=Sun-kissed&price=13&img=design8.png" class="card-buy">Buy</a>
+    </div>
 </div>
-</main>
 
 <footer class="footer">
-<p>© 2025 Lauryn’s Lovely Nails · <a href="contact.html" class="pink-link">DM to order</a></p>
+    <p>© 2025 Lauryn’s Lovely Nails · <a href="contact.html" class="pink-link">DM to order</a></p>
 </footer>
-
-<!-- Products JS -->
-<script src="products.js"></script>
-<script>
-const grid = document.querySelector('.product-grid');
-grid.innerHTML = ""; // Clear any static HTML
-
-products.forEach(product => {
-  const card = document.createElement('div');
-  card.classList.add('product-card');
-  if(product.name.toLowerCase().includes("custom")) card.classList.add("custom");
-
-  card.innerHTML = `
-    <img src="${product.img}" alt="${product.name}" class="product-image">
-    <p class="product-name">${product.name}</p>
-    <a href="order.html?design=${encodeURIComponent(product.name)}&price=${product.price}&img=${product.img}" class="card-buy">Buy</a>
-  `;
-
-  grid.appendChild(card);
-});
-</script>
 
 </body>
 </html>
