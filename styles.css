@@ -13,8 +13,8 @@ html, body {
     background: #ffe6f0;
     color: #5c2a4d;
     font-family: 'Cormorant Garamond', serif;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -34,7 +34,7 @@ body {
 }
 
 /* =========================
-   NAVBAR
+   NAVBAR + LOGO
 ========================= */
 .site-nav {
     display: flex;
@@ -46,17 +46,12 @@ body {
 }
 
 .site-nav .logo {
-    max-width: 220px;   /* larger logo */
+    max-width: 220px;
     height: auto;
     border-radius: 12px;
     display: block;
 }
 
-}
-
-}
-
-/* center nav links on wide screens, stack on small screens */
 .nav-links {
     display: flex;
     gap: 14px;
@@ -176,7 +171,7 @@ body {
 }
 
 /* images */
-.nail-image, .product-image {
+.nail-image, .product-image, .custom-image {
     width: 100%;
     border-radius: 12px;
     margin: 12px 0 6px;
@@ -336,7 +331,5 @@ body {
         font-size: 28px;
     }
 }
-
-
 
 
