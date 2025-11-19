@@ -5,6 +5,58 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Order - Lauryn's Lovely Nails</title>
 <link rel="stylesheet" href="styles.css">
+<style>
+/* --- Order Page Layout --- */
+body { font-family: 'Cormorant Garamond', serif; background-color: #fff0f5; margin:0; padding:0; }
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.left, .right { flex: 1 1 400px; }
+
+.left img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+label { font-weight:700; }
+select, input { padding:8px; border-radius:8px; border:1px solid #ccc; width:100%; }
+.total { font-weight:700; font-size:20px; color:hotpink; margin-top:10px; }
+button { background-color:#ff66b2; color:white; padding:10px; border:none; border-radius:12px; font-weight:700; cursor:pointer; }
+button:hover { background-color:#ff99cc; }
+
+/* --- NAVBAR --- */
+.site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background: #ffe6f0;
+    flex-wrap: wrap;
+}
+.site-nav .logo { max-width: 220px; border-radius: 12px; }
+.nav-links { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.nav-links a { text-decoration: none; color: #5c2a4d; font-weight:700; padding:6px 12px; border-radius:12px; transition: all 0.2s; }
+.nav-links a:hover { background: #ff99cc; color:white; }
+
+/* --- Responsive --- */
+@media (max-width: 800px) {
+    .container { flex-direction: column; }
+}
+</style>
 </head>
 <body>
 
@@ -20,11 +72,10 @@
     </div>
 </nav>
 
-<main class="container">
+<div class="container">
     <div class="left">
-        <img id="designImage" src="" alt="Design" class="product-image">
+        <img id="designImage" src="" alt="Design">
     </div>
-
     <div class="right">
         <h2 id="designName">Design Name</h2>
 
@@ -53,14 +104,14 @@
         <label for="fullName">Full Name:</label>
         <input type="text" id="fullName" placeholder="Your full name">
 
-        <label for="contact">Instagram or Gmail:</label>
+        <label for="contact">Instagram or Gmail (required):</label>
         <input type="text" id="contact" placeholder="Your Instagram or Gmail" required>
 
         <div class="total">Total: $0</div>
 
         <button onclick="placeOrder()">Place Order</button>
     </div>
-</main>
+</div>
 
 <script>
 // Get URL params
@@ -69,7 +120,7 @@ const designNameParam = params.get('design') || 'Unknown Design';
 const basePrice = parseFloat(params.get('price')) || 0;
 const designImg = params.get('img') || 'design1.png';
 
-// Update image and name
+// Update image and design name
 document.getElementById('designName').textContent = designNameParam;
 document.getElementById('designImage').src = `images/${designImg}`;
 document.getElementById('designImage').alt = designNameParam;
@@ -84,24 +135,43 @@ function updateTotal() {
     if(lengthEl.value === "XXXL") price +=2;
     totalEl.textContent = `Total: $${price}`;
 }
-
 lengthEl.addEventListener('change', updateTotal);
 updateTotal();
 
-// Place order function
+// Place order
 function placeOrder() {
     const fullName = document.getElementById('fullName').value.trim();
     const contact = document.getElementById('contact').value.trim();
+    const shape = document.getElementById('shape').value;
+    const length = document.getElementById('length').value;
 
     if (!contact) {
         alert("Please enter your Instagram or Gmail.");
         return;
     }
 
-    alert(`Order placed for ${designNameParam}!\n${totalEl.textContent}\nName: ${fullName}\nContact: ${contact}`);
+    const orderData = {
+        customer_name: fullName,
+        customer_email: contact,
+        product: `${designNameParam} | Length: ${length} | Shape: ${shape} | Price: ${totalEl.textContent.replace('Total: $','')}`
+    };
+
+    // <-- Replace with your Render backend URL -->
+    fetch('https://YOUR-RENDER-BACKEND.onrender.com/order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(orderData)
+    })
+    .then(res => res.text())
+    .then(msg => alert("✅ Order sent successfully!"))
+    .catch(err => {
+        console.error(err);
+        alert("❌ Error sending order. Check console for details.");
+    });
 }
 </script>
 
 </body>
 </html>
+
 
