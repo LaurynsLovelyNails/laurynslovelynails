@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Order - Lauryn's Lovely Nails</title>
 <link rel="stylesheet" href="styles.css">
+
 <style>
-/* Order page specific overrides */
 body { background-color: #fff0f5; margin:0; padding:0; font-family: 'Cormorant Garamond', serif; }
 .container { max-width:900px; margin:20px auto; padding:20px; display:flex; flex-wrap:wrap; gap:20px; }
 .left, .right { flex:1 1 400px; }
@@ -29,10 +29,18 @@ button:hover { background-color:#ff99cc; }
 }
 .site-nav .logo { max-width: 220px; border-radius: 12px; }
 .nav-links { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
-.nav-links a { text-decoration: none; color: #5c2a4d; font-weight:700; padding:6px 12px; border-radius:12px; transition: all 0.2s; }
+.nav-links a {
+    text-decoration: none;
+    color: #5c2a4d;
+    font-weight:700;
+    padding:6px 12px;
+    border-radius:12px;
+    transition: all 0.2s;
+}
 .nav-links a:hover { background: #ff99cc; color:white; }
 </style>
 </head>
+
 <body>
 
 <!-- NAVBAR -->
@@ -48,9 +56,11 @@ button:hover { background-color:#ff99cc; }
 </nav>
 
 <div class="container">
+
     <div class="left">
-        <img id="designImage" src="" alt="Design">
+        <img id="designImage" src="" alt="Design Image">
     </div>
+
     <div class="right">
         <h2 id="designName">Design Name</h2>
 
@@ -80,7 +90,7 @@ button:hover { background-color:#ff99cc; }
         <input type="text" id="fullName" placeholder="Your full name">
 
         <label for="contact">Instagram or Gmail:</label>
-        <input type="text" id="contact" placeholder="Your Instagram or Gmail" required>
+        <input type="text" id="contact" placeholder="Your Instagram or Gmail">
 
         <div class="total">Total: $0</div>
 
@@ -90,35 +100,40 @@ button:hover { background-color:#ff99cc; }
 
 <!-- Load product info -->
 <script src="products.js"></script>
+
 <script>
+// Get product name from URL
 const params = new URLSearchParams(window.location.search);
 const designNameParam = params.get('design') || 'Unknown Design';
 
-// Find product in products.js
-const product = products.find(p => p.name === designNameParam) || { name: 'Unknown', img: 'design1.png', price: 0 };
+// Get matching product
+const product = products.find(p => p.name === designNameParam);
 
-const basePrice = product.price;
-const designImg = product.img;
-
-// Update UI
-document.getElementById('designName').textContent = product.name;
-document.getElementById('designImage').src = `images/${designImg}`;
-document.getElementById('designImage').alt = product.name;
+// If no match found
+if (!product) {
+    document.getElementById('designName').textContent = "Unknown Design";
+    document.getElementById('designImage').src = "images/design1.png";
+} else {
+    document.getElementById('designName').textContent = product.name;
+    document.getElementById('designImage').src = product.img;   // FIXED: no double “images/images”
+    document.getElementById('designImage').alt = product.name;
+}
 
 // Price calculation
+const basePrice = product ? product.price : 0;
 const lengthEl = document.getElementById('length');
 const totalEl = document.querySelector('.total');
 
 function updateTotal() {
     let price = basePrice;
-    if(lengthEl.value === "XXL") price +=1;
-    if(lengthEl.value === "XXXL") price +=2;
+    if (lengthEl.value === "XXL") price += 1;
+    if (lengthEl.value === "XXXL") price += 2;
     totalEl.textContent = `Total: $${price}`;
 }
 lengthEl.addEventListener('change', updateTotal);
 updateTotal();
 
-// Place order function
+// Send order
 function placeOrder() {
     const fullName = document.getElementById('fullName').value.trim();
     const contact = document.getElementById('contact').value.trim();
@@ -139,8 +154,7 @@ Name: ${fullName}
 Contact: ${contact}
 `;
 
-    // Send order via backend API if you have one
-    fetch("https://your-backend-url/order", {
+    fetch("http://localhost:3000/order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -148,10 +162,15 @@ Contact: ${contact}
             customer_email: contact,
             product: orderInfo
         })
-    }).then(res => {
-        if(res.ok) alert("Order placed successfully!");
-        else alert("Failed to send order.");
-    }).catch(err => {
+    })
+    .then(res => {
+        if (res.ok) {
+            alert("Order placed successfully!");
+        } else {
+            alert("Failed to send order.");
+        }
+    })
+    .catch(err => {
         console.error(err);
         alert("Failed to send order.");
     });
@@ -160,5 +179,6 @@ Contact: ${contact}
 
 </body>
 </html>
+
 
 
