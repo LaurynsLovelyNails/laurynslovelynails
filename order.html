@@ -7,7 +7,8 @@
 <link rel="stylesheet" href="styles.css">
 
 <style>
-body { background-color: #fff0f5; margin:0; padding:0; font-family: 'Cormorant Garamond', serif; }
+/* Order page styling */
+body { background:#fff0f5; margin:0; padding:0; font-family:'Cormorant Garamond', serif; }
 .container { max-width:900px; margin:20px auto; padding:20px; display:flex; flex-wrap:wrap; gap:20px; }
 .left, .right { flex:1 1 400px; }
 .left img { width:100%; border-radius:12px; }
@@ -15,37 +16,35 @@ body { background-color: #fff0f5; margin:0; padding:0; font-family: 'Cormorant G
 label { font-weight:700; }
 select,input { padding:8px; border-radius:8px; border:1px solid #ccc; width:100%; }
 .total { font-weight:700; font-size:20px; color:hotpink; margin-top:10px; }
-button { background-color:#ff66b2; color:white; padding:10px; border:none; border-radius:12px; font-weight:700; cursor:pointer; }
-button:hover { background-color:#ff99cc; }
+button { background:#ff66b2; color:white; padding:12px; border:none; border-radius:12px; font-weight:700; cursor:pointer; }
+button:hover { background:#ff99cc; }
 
 /* NAVBAR */
 .site-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 20px;
-    background: #ffe6f0;
-    flex-wrap: wrap;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:10px 20px;
+    background:#ffe6f0;
 }
-.site-nav .logo { max-width: 220px; border-radius: 12px; }
-.nav-links { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.logo { width:220px; border-radius:12px; }
+.nav-links { display:flex; gap:15px; }
 .nav-links a {
-    text-decoration: none;
-    color: #5c2a4d;
+    text-decoration:none;
+    color:#5c2a4d;
     font-weight:700;
     padding:6px 12px;
     border-radius:12px;
-    transition: all 0.2s;
 }
-.nav-links a:hover { background: #ff99cc; color:white; }
+.nav-links a:hover { background:#ff99cc; color:white; }
 </style>
-</head>
 
+</head>
 <body>
 
 <!-- NAVBAR -->
 <nav class="site-nav">
-    <a href="index.html"><img src="images/logo.png" alt="Lauryn's Lovely Nails" class="logo"></a>
+    <a href="index.html"><img src="images/logo.png" alt="Logo" class="logo"></a>
     <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="buy.html">Buy</a>
@@ -56,7 +55,6 @@ button:hover { background-color:#ff99cc; }
 </nav>
 
 <div class="container">
-
     <div class="left">
         <img id="designImage" src="" alt="Design Image">
     </div>
@@ -64,7 +62,7 @@ button:hover { background-color:#ff99cc; }
     <div class="right">
         <h2 id="designName">Design Name</h2>
 
-        <label for="length">Nail Length:</label>
+        <label>Nail Length:</label>
         <select id="length">
             <option value="XXS">XXS</option>
             <option value="XS">XS</option>
@@ -77,7 +75,7 @@ button:hover { background-color:#ff99cc; }
             <option value="XXXL">XXXL (+$2)</option>
         </select>
 
-        <label for="shape">Nail Shape:</label>
+        <label>Nail Shape:</label>
         <select id="shape">
             <option value="rounded">Rounded</option>
             <option value="square">Square</option>
@@ -86,11 +84,11 @@ button:hover { background-color:#ff99cc; }
             <option value="stiletto">Stiletto</option>
         </select>
 
-        <label for="fullName">Full Name:</label>
+        <label>Full Name:</label>
         <input type="text" id="fullName" placeholder="Your full name">
 
-        <label for="contact">Instagram or Gmail:</label>
-        <input type="text" id="contact" placeholder="Your Instagram or Gmail">
+        <label>Instagram or Email:</label>
+        <input type="text" id="contact" placeholder="Your Instagram or Gmail" required>
 
         <div class="total">Total: $0</div>
 
@@ -98,31 +96,27 @@ button:hover { background-color:#ff99cc; }
     </div>
 </div>
 
-<!-- Load product info -->
+<!-- PRODUCT DATA -->
 <script src="products.js"></script>
 
 <script>
-// Get product name from URL
+// Read URL params
 const params = new URLSearchParams(window.location.search);
-const designNameParam = params.get('design') || 'Unknown Design';
+const designNameParam = params.get('design');
 
-// Get matching product
+// Find product by name
 const product = products.find(p => p.name === designNameParam);
 
-// If no match found
-if (!product) {
-    document.getElementById('designName').textContent = "Unknown Design";
-    document.getElementById('designImage').src = "images/design1.png";
-} else {
-    document.getElementById('designName').textContent = product.name;
-    document.getElementById('designImage').src = product.img;   // FIXED: no double “images/images”
-    document.getElementById('designImage').alt = product.name;
+// If product exists → update page
+if (product) {
+    document.getElementById("designName").textContent = product.name;
+    document.getElementById("designImage").src = product.img;  // Already includes "images/"
 }
 
-// Price calculation
-const basePrice = product ? product.price : 0;
-const lengthEl = document.getElementById('length');
-const totalEl = document.querySelector('.total');
+// Price updates
+const basePrice = product.price;
+const lengthEl = document.getElementById("length");
+const totalEl = document.querySelector(".total");
 
 function updateTotal() {
     let price = basePrice;
@@ -130,52 +124,47 @@ function updateTotal() {
     if (lengthEl.value === "XXXL") price += 2;
     totalEl.textContent = `Total: $${price}`;
 }
-lengthEl.addEventListener('change', updateTotal);
+lengthEl.addEventListener("change", updateTotal);
 updateTotal();
 
-// Send order
+// PLACE ORDER
 function placeOrder() {
-    const fullName = document.getElementById('fullName').value.trim();
-    const contact = document.getElementById('contact').value.trim();
-    const shape = document.getElementById('shape').value;
-    const length = document.getElementById('length').value;
+    const fullName = document.getElementById("fullName").value.trim();
+    const contact = document.getElementById("contact").value.trim();
+    const length = document.getElementById("length").value;
+    const shape = document.getElementById("shape").value;
 
-    if (!contact) {
-        alert("Please enter your Instagram or Gmail.");
-        return;
-    }
+    if (!contact) return alert("Please enter your Instagram or Gmail.");
 
     const orderInfo = `
 Design: ${product.name}
-Price: ${totalEl.textContent.replace("Total: ","")}
+Price: ${totalEl.textContent}
 Length: ${length}
 Shape: ${shape}
-Name: ${fullName}
+Customer: ${fullName}
 Contact: ${contact}
 `;
 
-fetch("https://order-backend-qesa.onrender.com/order", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-        customer_name: fullName,
-        customer_email: contact,
-        product: orderInfo
+    // SEND TO BACKEND
+    fetch("https://order-backend-qesa.onrender.com/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            customer_name: fullName,
+            customer_email: contact,
+            product: orderInfo
+        })
     })
-})
-.then(res => res.text())
-.then(message => {
-    alert("ORDER SENT (Check your email or Instagram soon!)");
-})
-.catch(err => {
-    console.error(err);
-    alert("❌ Failed to send order. Please
+    .then(res => res.text())
+    .then(() => {
+        alert("ORDER SENT (Check your email or Instagram soon!)");
+    })
+    .catch(() => {
+        alert("❌ Failed to send order. Please try again.");
     });
 }
 </script>
 
 </body>
 </html>
-
-
 
