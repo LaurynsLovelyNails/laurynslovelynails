@@ -7,12 +7,6 @@
 <link rel="stylesheet" href="styles.css">
 <style>
 body { font-family: 'Cormorant Garamond', serif; background-color: #fff0f5; margin:0; padding:0; }
-.site-nav { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #ffe6f0; }
-.site-nav .logo { max-width: 220px; border-radius: 12px; }
-.nav-links { display: flex; gap: 15px; }
-.nav-links a { text-decoration: none; color: #5c2a4d; font-weight: 700; }
-.nav-links a:hover { color: hotpink; }
-
 .container { max-width:900px; margin:0 auto; padding:20px; display:flex; flex-wrap:wrap; gap:20px; }
 .left, .right { flex:1 1 400px; }
 .left img { width:100%; border-radius:12px; }
@@ -22,12 +16,28 @@ select,input { padding:8px; border-radius:8px; border:1px solid #ccc; width:100%
 .total { font-weight:700; font-size:20px; color:hotpink; margin-top:10px; }
 button { background-color:#ff66b2; color:white; padding:10px; border:none; border-radius:12px; font-weight:700; cursor:pointer; }
 button:hover { background-color:#ff99cc; }
+
+/* NAVBAR */
+.site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background: #ffe6f0;
+    flex-wrap: wrap;
+}
+.site-nav .logo { max-width: 180px; border-radius: 12px; }
+.nav-links { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.nav-links a { text-decoration: none; color: #5c2a4d; font-weight:700; padding:6px 12px; border-radius:12px; transition: all 0.2s; }
+.nav-links a:hover { background: #ff99cc; color:white; }
+
 </style>
 </head>
 <body>
 
+<!-- NAVBAR -->
 <nav class="site-nav">
-    <a href="index.html"><img src="images/logo.png" alt="Lauryn's Lovely Nails logo" class="logo"></a>
+    <a href="index.html"><img src="images/logo.png" alt="Lauryn's Lovely Nails" class="logo"></a>
     <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="buy.html">Buy</a>
@@ -39,8 +49,7 @@ button:hover { background-color:#ff99cc; }
 
 <div class="container">
     <div class="left">
-        <!-- Placeholder image -->
-        <img id="designImage" src="images/design-placeholder.png" alt="Design">
+        <img id="designImage" src="" alt="Design">
     </div>
     <div class="right">
         <h2 id="designName">Design Name</h2>
@@ -68,26 +77,27 @@ button:hover { background-color:#ff99cc; }
         </select>
 
         <label for="fullName">Full Name:</label>
-        <input type="text" id="fullName" placeholder="Your full name" required>
+        <input type="text" id="fullName" placeholder="Your full name">
 
         <label for="contact">Instagram or Gmail:</label>
         <input type="text" id="contact" placeholder="Your Instagram or Gmail" required>
 
         <div class="total">Total: $0</div>
 
-        <button id="placeOrderBtn">Place Order</button>
+        <button onclick="placeOrder()">Place Order</button>
     </div>
 </div>
 
 <script>
 const params = new URLSearchParams(window.location.search);
-const designName = params.get('design') || 'Unknown Design';
+const designNameParam = params.get('design') || 'Unknown Design';
 const basePrice = parseFloat(params.get('price')) || 0;
-const imgSrc = params.get('img') || 'design-placeholder.png';
+const designImg = params.get('img') || 'design1.png';
 
-// Update name and image
-document.getElementById('designName').textContent = designName;
-document.getElementById('designImage').src = `images/${imgSrc}`;
+// Update image and name
+document.getElementById('designName').textContent = designNameParam;
+document.getElementById('designImage').src = `images/${designImg}`;
+document.getElementById('designImage').alt = designNameParam;
 
 // Price calculation
 const lengthEl = document.getElementById('length');
@@ -99,22 +109,23 @@ function updateTotal() {
     if(lengthEl.value === "XXXL") price +=2;
     totalEl.textContent = `Total: $${price}`;
 }
-
 lengthEl.addEventListener('change', updateTotal);
 updateTotal();
 
-document.getElementById('placeOrderBtn').addEventListener('click', () => {
+// Place order function
+function placeOrder() {
     const fullName = document.getElementById('fullName').value.trim();
     const contact = document.getElementById('contact').value.trim();
 
-    if (!fullName || !contact) {
-        alert("Please fill in all required fields.");
+    if (!contact) {
+        alert("Please enter your Instagram or Gmail.");
         return;
     }
 
-    alert(`Order placed for ${designName}!\n${totalEl.textContent}\nName: ${fullName}\nContact: ${contact}`);
-});
+    alert(`Order placed for ${designNameParam}!\n${totalEl.textContent}\nName: ${fullName}\nContact: ${contact}`);
+}
 </script>
 
 </body>
 </html>
+
