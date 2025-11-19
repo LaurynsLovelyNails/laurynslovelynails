@@ -6,39 +6,19 @@
 <title>Order - Lauryn's Lovely Nails</title>
 <link rel="stylesheet" href="styles.css">
 <style>
-/* --- Order Page Layout --- */
-body { font-family: 'Cormorant Garamond', serif; background-color: #fff0f5; margin:0; padding:0; }
-
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    max-width: 1000px;
-    margin: 30px auto;
-    padding: 0 20px;
-}
-
-.left, .right { flex: 1 1 400px; }
-
-.left img {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-}
-
-.right {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
+/* Order page specific overrides */
+body { background-color: #fff0f5; margin:0; padding:0; font-family: 'Cormorant Garamond', serif; }
+.container { max-width:900px; margin:20px auto; padding:20px; display:flex; flex-wrap:wrap; gap:20px; }
+.left, .right { flex:1 1 400px; }
+.left img { width:100%; border-radius:12px; }
+.right { display:flex; flex-direction:column; gap:12px; }
 label { font-weight:700; }
-select, input { padding:8px; border-radius:8px; border:1px solid #ccc; width:100%; }
+select,input { padding:8px; border-radius:8px; border:1px solid #ccc; width:100%; }
 .total { font-weight:700; font-size:20px; color:hotpink; margin-top:10px; }
 button { background-color:#ff66b2; color:white; padding:10px; border:none; border-radius:12px; font-weight:700; cursor:pointer; }
 button:hover { background-color:#ff99cc; }
 
-/* --- NAVBAR --- */
+/* NAVBAR */
 .site-nav {
     display: flex;
     align-items: center;
@@ -51,11 +31,6 @@ button:hover { background-color:#ff99cc; }
 .nav-links { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
 .nav-links a { text-decoration: none; color: #5c2a4d; font-weight:700; padding:6px 12px; border-radius:12px; transition: all 0.2s; }
 .nav-links a:hover { background: #ff99cc; color:white; }
-
-/* --- Responsive --- */
-@media (max-width: 800px) {
-    .container { flex-direction: column; }
-}
 </style>
 </head>
 <body>
@@ -104,7 +79,7 @@ button:hover { background-color:#ff99cc; }
         <label for="fullName">Full Name:</label>
         <input type="text" id="fullName" placeholder="Your full name">
 
-        <label for="contact">Instagram or Gmail (required):</label>
+        <label for="contact">Instagram or Gmail:</label>
         <input type="text" id="contact" placeholder="Your Instagram or Gmail" required>
 
         <div class="total">Total: $0</div>
@@ -113,17 +88,22 @@ button:hover { background-color:#ff99cc; }
     </div>
 </div>
 
+<!-- Load product info -->
+<script src="products.js"></script>
 <script>
-// Get URL params
 const params = new URLSearchParams(window.location.search);
 const designNameParam = params.get('design') || 'Unknown Design';
-const basePrice = parseFloat(params.get('price')) || 0;
-const designImg = params.get('img') || 'design1.png';
 
-// Update image and design name
-document.getElementById('designName').textContent = designNameParam;
+// Find product in products.js
+const product = products.find(p => p.name === designNameParam) || { name: 'Unknown', img: 'design1.png', price: 0 };
+
+const basePrice = product.price;
+const designImg = product.img;
+
+// Update UI
+document.getElementById('designName').textContent = product.name;
 document.getElementById('designImage').src = `images/${designImg}`;
-document.getElementById('designImage').alt = designNameParam;
+document.getElementById('designImage').alt = product.name;
 
 // Price calculation
 const lengthEl = document.getElementById('length');
@@ -138,7 +118,7 @@ function updateTotal() {
 lengthEl.addEventListener('change', updateTotal);
 updateTotal();
 
-// Place order
+// Place order function
 function placeOrder() {
     const fullName = document.getElementById('fullName').value.trim();
     const contact = document.getElementById('contact').value.trim();
@@ -150,23 +130,30 @@ function placeOrder() {
         return;
     }
 
-    const orderData = {
-        customer_name: fullName,
-        customer_email: contact,
-        product: `${designNameParam} | Length: ${length} | Shape: ${shape} | Price: ${totalEl.textContent.replace('Total: $','')}`
-    };
+    const orderInfo = `
+Design: ${product.name}
+Price: ${totalEl.textContent.replace("Total: ","")}
+Length: ${length}
+Shape: ${shape}
+Name: ${fullName}
+Contact: ${contact}
+`;
 
-    // <-- Replace with your Render backend URL -->
-    fetch('https://YOUR-RENDER-BACKEND.onrender.com/order', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(orderData)
-    })
-    .then(res => res.text())
-    .then(msg => alert("✅ Order sent successfully!"))
-    .catch(err => {
+    // Send order via backend API if you have one
+    fetch("https://your-backend-url/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            customer_name: fullName,
+            customer_email: contact,
+            product: orderInfo
+        })
+    }).then(res => {
+        if(res.ok) alert("Order placed successfully!");
+        else alert("Failed to send order.");
+    }).catch(err => {
         console.error(err);
-        alert("❌ Error sending order. Check console for details.");
+        alert("Failed to send order.");
     });
 }
 </script>
