@@ -154,14 +154,14 @@ Name: ${fullName}
 Contact: ${contact}
 `;
 
-  fetch("https://order-backend-qesa.onrender.com/order", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            customer_name: fullName,
-            customer_email: contact,
-            product: orderInfo
-        })
+fetch("https://order-backend-qesa.onrender.com/order", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+        customer_name: fullName,
+        customer_email: contact,
+        product: orderInfo
+    })
 })
 .then(res => res.text())
 .then(message => {
@@ -169,7 +169,7 @@ Contact: ${contact}
 })
 .catch(err => {
     console.error(err);
-    alert("❌ Failed to send order. Please try again
+    alert("❌ Failed to send order. Please
     });
 }
 </script>
