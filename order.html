@@ -5,10 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Order - Lauryn's Lovely Nails</title>
 <link rel="stylesheet" href="styles.css">
+<style>
+body { font-family: 'Cormorant Garamond', serif; background-color: #fff0f5; margin:0; padding:0; }
+.site-nav { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #ffe6f0; }
+.site-nav .logo { max-width: 220px; border-radius: 12px; }
+.nav-links { display: flex; gap: 15px; }
+.nav-links a { text-decoration: none; color: #5c2a4d; font-weight: 700; }
+.nav-links a:hover { color: hotpink; }
+
+.container { max-width:900px; margin:0 auto; padding:20px; display:flex; flex-wrap:wrap; gap:20px; }
+.left, .right { flex:1 1 400px; }
+.left img { width:100%; border-radius:12px; }
+.right { display:flex; flex-direction:column; gap:10px; }
+label { font-weight:700; }
+select,input { padding:8px; border-radius:8px; border:1px solid #ccc; width:100%; }
+.total { font-weight:700; font-size:20px; color:hotpink; margin-top:10px; }
+button { background-color:#ff66b2; color:white; padding:10px; border:none; border-radius:12px; font-weight:700; cursor:pointer; }
+button:hover { background-color:#ff99cc; }
+</style>
 </head>
 <body>
 
-<!-- NAV BAR -->
 <nav class="site-nav">
     <a href="index.html"><img src="images/logo.png" alt="Lauryn's Lovely Nails logo" class="logo"></a>
     <div class="nav-links">
@@ -22,7 +39,8 @@
 
 <div class="container">
     <div class="left">
-        <img id="designImage" src="https://via.placeholder.com/400x400.png?text=Design+Image" alt="Design">
+        <!-- Placeholder image -->
+        <img id="designImage" src="images/design-placeholder.png" alt="Design">
     </div>
     <div class="right">
         <h2 id="designName">Design Name</h2>
@@ -50,10 +68,10 @@
         </select>
 
         <label for="fullName">Full Name:</label>
-        <input type="text" id="fullName" placeholder="Your full name">
+        <input type="text" id="fullName" placeholder="Your full name" required>
 
         <label for="contact">Instagram or Gmail:</label>
-        <input type="text" id="contact" placeholder="Your Instagram or Gmail">
+        <input type="text" id="contact" placeholder="Your Instagram or Gmail" required>
 
         <div class="total">Total: $0</div>
 
@@ -64,12 +82,12 @@
 <script>
 const params = new URLSearchParams(window.location.search);
 const designName = params.get('design') || 'Unknown Design';
-const designImg = params.get('img') || 'design1.png';
 const basePrice = parseFloat(params.get('price')) || 0;
+const imgSrc = params.get('img') || 'design-placeholder.png';
 
 // Update name and image
 document.getElementById('designName').textContent = designName;
-document.getElementById('designImage').src = `images/${designImg}`;
+document.getElementById('designImage').src = `images/${imgSrc}`;
 
 // Price calculation
 const lengthEl = document.getElementById('length');
@@ -85,27 +103,16 @@ function updateTotal() {
 lengthEl.addEventListener('change', updateTotal);
 updateTotal();
 
-// Render backend URL
-const BACKEND_URL = "https://your-backend.onrender.com/order"; // <-- Replace with your Render URL
-
 document.getElementById('placeOrderBtn').addEventListener('click', () => {
-    const orderData = {
-        customer_name: document.getElementById('fullName').value,
-        customer_email: document.getElementById('contact').value,
-        product: `${designName} - ${lengthEl.value} / ${document.getElementById('shape').value} - $${basePrice}`
-    };
+    const fullName = document.getElementById('fullName').value.trim();
+    const contact = document.getElementById('contact').value.trim();
 
-    fetch(BACKEND_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(orderData)
-    })
-    .then(res => res.text())
-    .then(response => alert("✅ " + response))
-    .catch(err => {
-        console.error(err);
-        alert("❌ Something went wrong. Check console for details.");
-    });
+    if (!fullName || !contact) {
+        alert("Please fill in all required fields.");
+        return;
+    }
+
+    alert(`Order placed for ${designName}!\n${totalEl.textContent}\nName: ${fullName}\nContact: ${contact}`);
 });
 </script>
 
