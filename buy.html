@@ -1,16 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Buy Nails - Lauryn's Lovely Nails</title>
 <link rel="stylesheet" href="styles.css">
+<style>
+/* Navbar */
+.site-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #ffe6f0;
+}
+
+.site-nav .logo {
+    max-width: 220px; /* Bigger logo */
+    height: auto;
+    border-radius: 12px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #5c2a4d;
+    font-weight: 700;
+}
+
+.nav-links a:hover { color: hotpink; }
+
+/* Product grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+    margin: 30px auto;
+    justify-items: center;
+}
+
+.product-card {
+    background-color: #fff7fb;
+    border-radius: 14px;
+    padding: 12px;
+    width: 100%;
+    max-width: 260px;
+    text-align: center;
+    border: 2px solid rgba(255,102,178,0.18);
+    transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 14px 38px rgba(255,102,178,0.12);
+}
+
+.product-image {
+    width: 100%;
+    border-radius: 12px;
+    margin: 12px 0 6px;
+}
+
+.product-name {
+    font-weight: 700;
+    font-size: 18px;
+    margin: 8px 0 6px;
+    color: #5c2a4d;
+}
+
+.card-buy {
+    display: inline-block;
+    background: transparent;
+    border: 2px dashed #ff66b2;
+    color: #ff66b2;
+    padding: 8px 12px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all .18s ease;
+}
+
+.card-buy:hover {
+    background: #ff66b2;
+    color: white;
+    border-style: solid;
+}
+
+/* Highlight custom card */
+.product-card.custom {
+    border: 3px solid #ff66b2;
+    box-shadow: 0 0 18px rgba(255,153,204,0.12);
+}
+</style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav class="site-nav">
-    <a href="index.html"><img src="images/logo.png" alt="Lauryn's Lovely Nails logo" class="logo" style="height:50px;"></a>
+    <a href="index.html"><img src="images/logo.png" alt="Lauryn's Lovely Nails logo" class="logo"></a>
     <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="buy.html">Buy</a>
@@ -21,40 +111,45 @@
 </nav>
 
 <main>
-<h2>Buy Our Nails</h2>
-<p>Click “Buy” to select your options and place your order.</p>
+<h2 style="text-align:center; color: hotpink;">Buy Our Nails</h2>
+<p style="text-align:center;">Click “Buy” to select your options and place your order.</p>
 
 <div class="product-grid">
-    <div class="product-card">
+    <!-- Custom Designs -->
+    <div class="product-card custom">
         <img src="images/custom.png" alt="Custom Designs" class="product-image">
         <p class="product-name">Custom Designs</p>
         <a href="custom-designs.html" class="card-buy">Buy</a>
     </div>
+
+    <!-- Premade Designs -->
     <div class="product-card">
         <img src="images/design1.png" alt="Pretty Little Lady" class="product-image">
         <p class="product-name">Pretty Little Lady</p>
         <a href="order.html?design=Pretty%20Little%20Lady&price=12&img=design1.png" class="card-buy">Buy</a>
     </div>
+
     <div class="product-card">
         <img src="images/design2.png" alt="Very Hungry Caterpillar" class="product-image">
         <p class="product-name">Very Hungry Caterpillar</p>
         <a href="order.html?design=Very%20Hungry%20Caterpillar&price=12&img=design2.png" class="card-buy">Buy</a>
     </div>
+
     <div class="product-card">
         <img src="images/design3.png" alt="Glitter Dream" class="product-image">
         <p class="product-name">Glitter Dream</p>
         <a href="order.html?design=Glitter%20Dream&price=13&img=design3.png" class="card-buy">Buy</a>
     </div>
+    <!-- Add remaining designs here -->
 </div>
 </main>
 
-<footer class="footer">
+<footer style="text-align:center; margin-top:50px;">
 <p>© 2025 Lauryn’s Lovely Nails · <a href="contact.html" class="pink-link">DM to order</a></p>
 </footer>
 
 </body>
 </html>
-
 
 
 
