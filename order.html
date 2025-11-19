@@ -162,17 +162,14 @@ Contact: ${contact}
             customer_email: contact,
             product: orderInfo
         })
-    })
-    .then(res => {
-        if (res.ok) {
-            alert("Order placed successfully!");
-        } else {
-            alert("Failed to send order.");
-        }
-    })
-    .catch(err => {
-        console.error(err);
-        alert("Failed to send order.");
+})
+.then(res => res.text())
+.then(message => {
+    alert("ORDER SENT (Check your email or Instagram soon!)");
+})
+.catch(err => {
+    console.error(err);
+    alert("❌ Failed to send order. Please try again
     });
 }
 </script>
