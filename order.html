@@ -62,21 +62,24 @@ button:hover { background-color:#ff99cc; }
 </div>
 
 <script>
+// Get URL parameters
 const params = new URLSearchParams(window.location.search);
 const designName = params.get('design') || 'Unknown Design';
 const basePrice = parseFloat(params.get('price')) || 0;
 const imgFile = params.get('img') || 'placeholder.png';
 
+// Update design name and image
 document.getElementById('designName').textContent = designName;
 document.getElementById('designImage').src = `images/${imgFile}`;
 
+// Update total based on length
 const lengthEl = document.getElementById('length');
 const totalEl = document.querySelector('.total');
 
 function updateTotal() {
     let price = basePrice;
-    if(lengthEl.value === "XXL") price +=1;
-    if(lengthEl.value === "XXXL") price +=2;
+    if(lengthEl.value === "XXL") price += 1;
+    if(lengthEl.value === "XXXL") price += 2;
     totalEl.textContent = `Total: $${price}`;
 }
 
@@ -90,6 +93,7 @@ function placeOrder() {
 
 </body>
 </html>
+
 
 
 
