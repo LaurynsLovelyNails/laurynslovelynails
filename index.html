@@ -1,73 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Lauryn's Lovely Nails</title>
-<link rel="stylesheet" href="styles.css">
-<style>
-body { background-color: #fff0f5; font-family: 'Cormorant Garamond', serif; margin:0; padding:0; }
-.site-nav { display:flex; justify-content:space-between; align-items:center; padding:15px; }
-.site-nav .nav-links a { margin-left:15px; text-decoration:none; color:#333; font-weight:700; }
-.site-nav .nav-links a:hover { color: hotpink; }
-.hero { text-align:center; padding:40px 20px; }
-.hero h1 { color: hotpink; font-size:36px; margin-bottom:10px; }
-.hero p { font-size:18px; margin-bottom:20px; }
-.pink-button { background-color:#ff66b2; color:white; padding:10px 20px; border-radius:12px; text-decoration:none; font-weight:700; }
-.pink-button:hover { background-color:#ff99cc; }
-.product-grid { display:flex; flex-wrap:wrap; gap:20px; justify-content:center; margin-top:20px; }
-.product-card { background-color:#fff0f5; border-radius:15px; padding:10px; text-align:center; flex:1 1 200px; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
-.product-card img { width:100%; border-radius:12px; }
-.product-name { font-weight:700; margin:8px 0; }
-.card-buy { display:inline-block; background-color:#ff66b2; color:white; padding:6px 12px; border-radius:12px; text-decoration:none; font-weight:700; }
-.card-buy:hover { background-color:#ff99cc; }
-</style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Lauryn's Lovely Nails</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="container">
 
-<nav class="site-nav">
-    <a href="index.html"><img src="images/logo.png" alt="Lauryn's Lovely Nails logo" style="height:50px;"></a>
-    <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="buy.html">Buy</a>
-        <a href="nail-sizing.html">Nail Sizing</a>
-        <a href="custom-designs.html">Custom</a>
-        <a href="contact.html">Contact</a>
+        <!-- NAV -->
+        <nav class="site-nav" aria-label="Primary">
+            <a href="index.html"><img src="logo.png" alt="Lauryn's Lovely Nails logo" class="logo"></a>
+            <div class="nav-links" role="navigation" aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="buy.html">Buy</a>
+                <a href="nail-sizing.html">Nail Sizing</a>
+                <a href="custom-designs.html">Custom</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </nav>
+
+        <!-- HERO -->
+        <header class="hero" role="banner">
+            <h1>Lauryn's Lovely Nails</h1>
+            <p class="lead">Handmade press-on nails crafted with care by Lauryn — gentle, playful, and all made with love. DM on Instagram to order or to save your sizing for future orders.</p>
+            <p><a href="buy.html" class="pink-button">Shop Nails</a></p>
+        </header>
+
+        <!-- ABOUT + SIZING -->
+        <div class="info-container" role="region" aria-label="About and sizing">
+            <section class="info-card">
+                <h2>About Lauryn</h2>
+                <p>Hi — I’m Lauryn, a 14-year-old making press-on nails as a small business. Every nail I make is made with patience and care. I started after seeing other young nail artists find success on social media, and decided to try too. Thank you for considering supporting my dream!</p>
+            </section>
+
+            <section class="info-card">
+                <h2>How to Size</h2>
+                <p>Want nails that fit perfectly? Click below for a quick step-by-step guide on how to size and send me your photos.</p>
+                <p><a href="nail-sizing.html" class="pink-button">Learn Nail Sizing</a></p>
+            </section>
+        </div>
+
+
+        <!-- CONTACT CALL-OUT -->
+        <section class="contact-wrap" aria-label="Contact">
+            <h2>Ready to order?</h2>
+            <p class="muted">DM me on Instagram: <a href="https://instagram.com/laurynslovelynails" target="_blank" rel="noopener" class="pink-link">@laurynslovelynails</a></p>
+            <p><a href="contact.html" class="pink-button">Contact & Ordering Info</a></p>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="footer" role="contentinfo">
+            <p>© 2025 Lauryn’s Lovely Nails · Handmade with love 💗 · <a href="contact.html" class="pink-link">DM to order</a></p>
+            <p class="muted">Sizing photos saved for repeat customers — saves time on future orders.</p>
+        </footer>
+
     </div>
-</nav>
-
-<div class="hero">
-    <h1>Lauryn's Lovely Nails</h1>
-    <p>Handmade press-on nails crafted with care. Click below to shop!</p>
-    <a href="buy.html" class="pink-button">Shop Nails</a>
-</div>
-
-<h2 style="text-align:center; color:hotpink; margin-top:30px;">Featured Designs</h2>
-<div class="product-grid">
-    <div class="product-card">
-        <img src="images/design1.png" alt="Pretty Little Lady">
-        <p class="product-name">Pretty Little Lady</p>
-        <a href="order.html?design=Pretty%20Little%20Lady&price=12&img=design1.png" class="card-buy">Buy</a>
-    </div>
-    <div class="product-card">
-        <img src="images/design2.png" alt="Very Hungry Caterpillar">
-        <p class="product-name">Very Hungry Caterpillar</p>
-        <a href="order.html?design=Very%20Hungry%20Caterpillar&price=12&img=design2.png" class="card-buy">Buy</a>
-    </div>
-    <div class="product-card">
-        <img src="images/custom.png" alt="Custom Designs">
-        <p class="product-name">Custom Designs</p>
-        <a href="custom-designs.html" class="card-buy">Buy</a>
-    </div>
-</div>
-
-<footer style="text-align:center; margin-top:50px; padding:15px 0;">
-    <p>© 2025 Lauryn’s Lovely Nails · <a href="contact.html" style="color:hotpink;">DM to order</a></p>
-</footer>
-
 </body>
 </html>
-
 
 
 
